@@ -1,0 +1,61 @@
+{% extends "app/base.html" %}
+
+{% block titre %}Biens assurés{% endblock %}
+{% block nav_biens %}actif{% endblock %}
+
+{% block contenu %}
+  <div class="entete-page">
+    <div>
+      <h1>Biens assurés</h1>
+      <p class="sous-titre">Véhicules, logements et personnes couverts par les contrats.</p>
+    </div>
+    <a href="{% url 'bien_creer' %}" class="btn">+ Nouveau bien</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="valeur">{{ stats.total }}</div><div class="libelle">Biens affichés</div></div>
+    <div class="stat"><div class="valeur">{{ stats.vehicules }}</div><div class="libelle">Véhicules</div></div>
+    <div class="stat"><div class="valeur">{{ stats.logements }}</div><div class="libelle">Logements</div></div>
+    <div class="stat"><div class="valeur">{{ stats.personnes }}</div><div class="libelle">Personnes assurées</div></div>
+  </div>
+
+  <form method="get" class="filtres">
+    <input type="search" name="q" placeholder="Marque, modèle, adresse, immatriculation…" value="{{ f.q }}">
+    <select name="type">
+      <option value="">Tous les types</option>
+      {% for code, nom in types.items %}<option value="{{ code }}" {% if code == f.type %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+    </select>
+    <select name="proprietaire">
+      <option value="">Tous les propriétaires</option>
+      {% for id, nom in proprietaires %}<option value="{{ id }}" {% if id == f.proprietaire %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+    </select>
+    <input type="number" step="any" name="valeur_min" placeholder="Valeur min" value="{{ f.valeur_min }}">
+    <input type="number" step="any" name="valeur_max" placeholder="Valeur max" value="{{ f.valeur_max }}">
+    <button type="submit" class="btn">Filtrer</button>
+    <a href="{% url 'biens' %}" class="btn btn-secondaire">Réinitialiser</a>
+  </form>
+
+  <div class="carte-tableau">
+    <table>
+      <tr><th>Type</th><th>Bien</th><th>Détails</th><th>Valeur (TND)</th><th>Propriétaire(s)</th><th></th></tr>
+      {% for b in biens %}
+        <tr>
+          <td><span class="badge badge-infere">{{ b.type }}</span></td>
+          <td><strong>{{ b.titre }}</strong></td>
+          <td>{{ b.detail }}</td>
+          <td>{{ b.valeur }}</td>
+          <td>{% for p in b.proprietaires %}<span class="badge statut-declare">{{ p }}</span>{% empty %}—{% endfor %}</td>
+          <td class="actions">
+            <a class="btn btn-petit btn-secondaire" href="{% url 'bien_modifier' b.id %}">Modifier</a>
+            <form method="post" action="{% url 'bien_supprimer' b.id %}" data-confirm="Supprimer « {{ b.titre }} » ? Cette action est définitive.">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-petit btn-danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6" class="vide">Aucun bien ne correspond aux filtres.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

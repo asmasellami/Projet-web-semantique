@@ -1,0 +1,66 @@
+{% extends "app/base.html" %}
+
+{% block titre %}Sinistres{% endblock %}
+{% block nav_sinistres %}actif{% endblock %}
+
+{% block contenu %}
+  <h1>Sinistres</h1>
+
+  <div class="stats">
+    <div class="stat"><div class="valeur">{{ stats.total }}</div><div class="libelle">Sinistres affichés</div></div>
+    <div class="stat"><div class="valeur">{{ stats.en_expertise }}</div><div class="libelle">En expertise</div></div>
+    <div class="stat"><div class="valeur">{{ stats.indemnises }}</div><div class="libelle">Indemnisés</div></div>
+    <div class="stat"><div class="valeur">{{ stats.score_moyen }}</div><div class="libelle">Score de fraude moyen</div></div>
+  </div>
+
+  <form method="get" class="filtres">
+    <select name="type">
+      <option value="">Tous les types</option>
+      {% for code, libelle in types %}
+        <option value="{{ code }}" {% if code == type_choisi %}selected{% endif %}>{{ libelle }}</option>
+      {% endfor %}
+    </select>
+    <select name="statut">
+      <option value="">Tous les statuts</option>
+      {% for s in statuts %}
+        <option value="{{ s }}" {% if s == statut %}selected{% endif %}>{{ s }}</option>
+      {% endfor %}
+    </select>
+    <input type="text" name="lieu" placeholder="Lieu (ex : Ariana)" value="{{ lieu }}">
+    <button type="submit" class="btn">Filtrer</button>
+    <a href="{% url 'sinistres' %}" class="btn btn-secondaire">Réinitialiser</a>
+  </form>
+
+  <div class="carte-tableau">
+    <table>
+      <tr>
+        <th>N° dossier</th>
+        <th>Type</th>
+        <th>Catégories déduites</th>
+        <th>Statut</th>
+        <th>Lieu</th>
+        <th>Date</th>
+        <th>Score fraude</th>
+      </tr>
+      {% for s in sinistres %}
+        <tr>
+          <td class="mono">{{ s.num }}</td>
+          <td>{{ s.type }}</td>
+          <td>
+            {% for c in s.categories %}
+              <span class="badge badge-infere">{{ c }}</span>
+            {% empty %}
+              <span style="color: var(--texte-doux)">—</span>
+            {% endfor %}
+          </td>
+          <td><span class="badge statut-{{ s.statut|slugify }}">{{ s.statut }}</span></td>
+          <td>{{ s.lieu }}</td>
+          <td>{{ s.date }}</td>
+          <td><span class="score score-{{ s.niveau_score }}">{{ s.score }}</span></td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="7" class="vide">Aucun sinistre ne correspond aux filtres.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

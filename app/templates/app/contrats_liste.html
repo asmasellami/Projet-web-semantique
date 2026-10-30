@@ -1,0 +1,70 @@
+{% extends "app/base.html" %}
+
+{% block titre %}Contrats{% endblock %}
+{% block nav_contrats %}actif{% endblock %}
+
+{% block contenu %}
+  <div class="entete-page">
+    <div>
+      <h1>Contrats d'assurance</h1>
+      <p class="sous-titre">Recherchez, filtrez et gérez les contrats stockés dans l'ontologie.</p>
+    </div>
+    <a href="{% url 'contrat_creer' %}" class="btn">+ Nouveau contrat</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="valeur">{{ stats.total }}</div><div class="libelle">Contrats affichés</div></div>
+    <div class="stat"><div class="valeur">{{ stats.actifs }}</div><div class="libelle">Actifs</div></div>
+    <div class="stat"><div class="valeur">{{ stats.prime_totale }}</div><div class="libelle">Primes annuelles (TND)</div></div>
+  </div>
+
+  <form method="get" class="filtres">
+    <input type="search" name="q" placeholder="Rechercher un n° de contrat…" value="{{ f.q }}">
+    <select name="type">
+      <option value="">Tous les types</option>
+      {% for code, nom in types.items %}<option value="{{ code }}" {% if code == f.type %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+    </select>
+    <select name="statut">
+      <option value="">Tous les statuts</option>
+      {% for s in statuts %}<option value="{{ s }}" {% if s == f.statut %}selected{% endif %}>{{ s }}</option>{% endfor %}
+    </select>
+    <select name="mode">
+      <option value="">Tous les paiements</option>
+      {% for m in modes %}<option value="{{ m }}" {% if m == f.mode %}selected{% endif %}>{{ m }}</option>{% endfor %}
+    </select>
+    <input type="number" step="any" name="prime_min" placeholder="Prime min" value="{{ f.prime_min }}">
+    <input type="number" step="any" name="prime_max" placeholder="Prime max" value="{{ f.prime_max }}">
+    <button type="submit" class="btn">Filtrer</button>
+    <a href="{% url 'contrats' %}" class="btn btn-secondaire">Réinitialiser</a>
+  </form>
+
+  <div class="carte-tableau">
+    <table>
+      <tr>
+        <th>N° contrat</th><th>Type</th><th>Statut</th><th>Prime</th><th>Période</th>
+        <th>Paiement</th><th>Assureur</th><th>Biens couverts</th><th></th>
+      </tr>
+      {% for c in contrats %}
+        <tr>
+          <td class="mono">{{ c.num }}</td>
+          <td>{{ c.type }}</td>
+          <td><span class="badge statut-{{ c.statut|slugify }}">{{ c.statut }}</span></td>
+          <td>{{ c.prime }}</td>
+          <td class="nowrap">{{ c.debut }} → {{ c.fin }}</td>
+          <td>{{ c.mode }}{% if c.tacite %} <span class="badge badge-infere" title="Renouvellement tacite">↻</span>{% endif %}</td>
+          <td>{{ c.assureur }}</td>
+          <td>{% for b in c.biens %}<span class="badge badge-infere">{{ b }}</span>{% empty %}—{% endfor %}</td>
+          <td class="actions">
+            <a class="btn btn-petit btn-secondaire" href="{% url 'contrat_modifier' c.id %}">Modifier</a>
+            <form method="post" action="{% url 'contrat_supprimer' c.id %}" data-confirm="Supprimer le contrat {{ c.num }} ? Cette action est définitive.">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-petit btn-danger">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="9" class="vide">Aucun contrat ne correspond aux filtres.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

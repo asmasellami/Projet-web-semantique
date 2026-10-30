@@ -1,0 +1,74 @@
+{% extends "app/base.html" %}
+
+{% block titre %}{% if edition %}Modifier le bien{% else %}Nouveau bien{% endif %}{% endblock %}
+{% block nav_biens %}actif{% endblock %}
+
+{% block contenu %}
+  <h1>{% if edition %}Modifier le bien{% else %}Nouveau bien{% endif %}</h1>
+  <p class="sous-titre">Les champs affichés dépendent du type de bien.</p>
+
+  {% if erreurs %}
+    <div class="message message-error"><ul>{% for e in erreurs %}<li>{{ e }}</li>{% endfor %}</ul></div>
+  {% endif %}
+
+  <form method="post" class="formulaire">
+    {% csrf_token %}
+    <label>Type de bien
+      {% if edition %}
+        <input type="text" value="{% for code, nom in types.items %}{% if code == type %}{{ nom }}{% endif %}{% endfor %}" readonly>
+        <input type="hidden" name="type" value="{{ type }}" id="type-bien">
+      {% else %}
+        <select name="type" id="type-bien" required>
+          <option value="">—</option>
+          {% for code, nom in types.items %}<option value="{{ code }}" {% if code == type %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+        </select>
+      {% endif %}
+    </label>
+    <label>Propriétaire
+      <select name="proprietaire">
+        <option value="">— aucun —</option>
+        {% for id, nom in proprietaires %}<option value="{{ id }}" {% if id == proprio %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+      </select>
+    </label>
+
+    {% for g in groupes %}
+      <div class="groupe-champs" data-type="{{ g.code }}" hidden>
+        {% for c in g.champs %}
+          <label>{{ c.nom }}
+            {% if c.genre == "choix" %}
+              <select name="{{ c.cle }}" disabled>
+                {% for t in types_logement %}<option value="{{ t }}" {% if t == c.valeur %}selected{% endif %}>{{ t }}</option>{% endfor %}
+              </select>
+            {% else %}
+              <input name="{{ c.cle }}" value="{{ c.valeur }}" disabled
+                     type="{% if c.genre == 'date' %}date{% elif c.genre == 'entier' or c.genre == 'decimal' %}number{% else %}text{% endif %}"
+                     {% if c.genre == 'decimal' %}step="0.01"{% endif %} {% if c.obligatoire %}data-requis{% endif %}>
+            {% endif %}
+          </label>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <div class="formulaire-actions">
+      <button type="submit" class="btn">{% if edition %}Enregistrer{% else %}Créer le bien{% endif %}</button>
+      <a href="{% url 'biens' %}" class="btn btn-secondaire">Annuler</a>
+    </div>
+  </form>
+
+  <script>
+    // N'active (et ne soumet) que les champs du type choisi.
+    const choix = document.getElementById("type-bien");
+    function afficher() {
+      document.querySelectorAll(".groupe-champs").forEach(g => {
+        const actif = g.dataset.type === choix.value;
+        g.hidden = !actif;
+        g.querySelectorAll("input, select").forEach(el => {
+          el.disabled = !actif;
+          if (el.hasAttribute("data-requis")) el.required = actif;
+        });
+      });
+    }
+    choix.addEventListener("change", afficher);
+    afficher();
+  </script>
+{% endblock %}

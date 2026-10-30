@@ -1,0 +1,35 @@
+{% extends "app/base.html" %}
+
+{% block titre %}Accueil{% endblock %}
+{% block nav_accueil %}actif{% endblock %}
+
+{% block contenu %}
+  <h1>Tableau de bord</h1>
+
+  <div class="stats">
+    <div class="stat"><div class="valeur">{{ totaux.classes }}</div><div class="libelle">Classes</div></div>
+    <div class="stat"><div class="valeur">{{ totaux.sous_classes }}</div><div class="libelle">Sous-classes</div></div>
+    <div class="stat"><div class="valeur">{{ totaux.individus }}</div><div class="libelle">Individus</div></div>
+    <div class="stat"><div class="valeur">{{ totaux.proprietes_objet }}</div><div class="libelle">Propriétés d'objet</div></div>
+    <div class="stat"><div class="valeur">{{ totaux.proprietes_donnees }}</div><div class="libelle">Propriétés de données</div></div>
+  </div>
+
+  <h2 class="titre-section">Répartition par classe principale</h2>
+  <div class="carte-tableau">
+    <table>
+      <tr><th>Classe</th><th>Sous-classes</th><th>Individus</th><th class="col-barre"></th></tr>
+      {% for c in classes %}
+        <tr>
+          <td>
+            {% if c.url %}<a class="lien" href="{% url c.url %}">{{ c.nom }}</a>{% else %}{{ c.nom }}{% endif %}
+          </td>
+          <td>{{ c.sous }}</td>
+          <td>{{ c.individus }}</td>
+          <td class="col-barre"><div class="barre"><div class="barre-remplie" style="width: {{ c.pct }}%"></div></div></td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4" class="vide">Aucune classe trouvée dans Fuseki.</td></tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
