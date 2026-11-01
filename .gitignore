@@ -11,3 +11,6 @@ db.sqlite3
 
 # Environnement Python
 /.venv/
+
+# Documentation locale du membre 3
+/docs/member-3/
