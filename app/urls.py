@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views, views_biens, views_contrats, views_crud
+from . import views, views_assures, views_biens, views_contrats, views_crud, views_nlp
 from .services.registre import REGISTRE
 
 urlpatterns = [
@@ -10,6 +10,9 @@ urlpatterns = [
     path("contrats/nouveau/", views_contrats.creer_contrat, name="contrat_creer"),
     path("contrats/<str:ident>/modifier/", views_contrats.modifier_contrat, name="contrat_modifier"),
     path("contrats/<str:ident>/supprimer/", views_contrats.supprimer_contrat, name="contrat_supprimer"),
+
+    path("assures/", views_assures.liste_assures, name="assures"),
+    path("question/", views_nlp.poser_question, name="question"),
 
     path("biens/", views_biens.liste_biens, name="biens"),
     path("biens/nouveau/", views_biens.creer_bien, name="bien_creer"),

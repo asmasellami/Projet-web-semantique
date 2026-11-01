@@ -671,3 +671,36 @@ td { font-size: .93rem; }
   font-size: .9rem;
 }
 .indice[hidden] { display: none; }
+
+/* ---------- Page « Poser une question » (NLP) ---------- */
+.question-form { display: flex; gap: .7rem; margin-bottom: 1rem; max-width: 900px; }
+.question-form input {
+  flex: 1; padding: .85rem 1.1rem; border: 1px solid var(--bordure); border-radius: 12px;
+  background: var(--carte); font: inherit; color: var(--texte);
+}
+.question-form input:focus { outline: none; border-color: var(--primaire); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primaire) 22%, transparent); }
+.exemples { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: 1.5rem; color: var(--texte-doux); font-size: .85rem; }
+.puce {
+  padding: .35rem .8rem; border: 1px solid var(--bordure); border-radius: 999px; background: var(--carte);
+  color: var(--texte); text-decoration: none; font-size: .85rem; transition: border-color .15s, transform .15s;
+}
+a.puce:hover { border-color: var(--primaire); transform: translateY(-1px); }
+.puce-fixe { cursor: default; }
+.panneau { background: var(--carte); border: 1px solid var(--bordure); border-radius: 16px; padding: 1.25rem 1.5rem; margin-bottom: 1.25rem; }
+.panneau h2 { font-size: 1.05rem; margin: 0 0 .9rem; }
+.grille-analyse { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem 1.5rem; }
+.etiquette { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--texte-doux); }
+.indice { color: var(--texte-doux); font-size: .85rem; margin: .5rem 0; }
+pre.sparql {
+  margin: 0; padding: 1rem 1.2rem; overflow-x: auto; border-radius: 12px; background: #0f172a; color: #e2e8f0;
+  font: .82rem/1.55 "JetBrains Mono", Consolas, monospace;
+}
+.message-warning { color: var(--orange); background: color-mix(in srgb, var(--orange) 10%, var(--carte)); }
+details summary { cursor: pointer; margin-top: 1rem; font-weight: 600; color: var(--primaire); }
+details .carte-tableau { margin-top: .8rem; }
+.panneau .carte-tableau { overflow-x: auto; }
+.panneau td:first-child { white-space: normal; }
+.panneau th, .panneau td { padding: .65rem .7rem; }
+.panneau .carte-tableau { scrollbar-width: thin; }
+.panneau table { font-size: .85rem; }
+.panneau td, .panneau th { overflow-wrap: anywhere; }

@@ -1,0 +1,118 @@
+{% extends "app/base.html" %}
+
+{% block titre %}Poser une question{% endblock %}
+
+{% block contenu %}
+  <h1>Poser une question</h1>
+  <p class="sous-titre">Posez votre question en français : elle est analysée avec <strong>spaCy</strong> (règles d'intention + templates), traduite en requête SPARQL puis exécutée sur Fuseki. Aucun LLM n'est utilisé.</p>
+
+  <form method="get" class="question-form">
+    <input type="text" name="q" value="{{ q }}" maxlength="300" autofocus required
+           placeholder="Ex. : Quels sont les biens assurés de Ahmed ?" aria-label="Question">
+    <button type="submit" class="btn">Interroger</button>
+  </form>
+
+  <div class="exemples">
+    <span>Exemples :</span>
+    {% for i in intentions %}{% for ex in i.exemples %}
+      <a class="puce" href="?q={{ ex|urlencode }}" title="{{ i.libelle }}">{{ ex }}</a>
+    {% endfor %}{% endfor %}
+  </div>
+
+  {% if rep %}
+    {% if rep.statut == "ok" %}
+      <div class="message message-success">Question comprise : <strong>{{ rep.intention.libelle }}</strong>
+        — {{ rep.lignes|length }} résultat{{ rep.lignes|length|pluralize }} en {{ rep.duree_ms }} ms.</div>
+    {% elif rep.statut == "ambigue" %}
+      <div class="message message-warning">{{ rep.message }}</div>
+    {% else %}
+      <div class="message message-error">{{ rep.message }}</div>
+    {% endif %}
+
+    {% if rep.statut == "ambigue" %}
+      <div class="panneau">
+        <h2>Précisez votre choix</h2>
+        <div class="exemples">
+          {% for c in candidats %}
+            <a class="puce" href="?q={{ q|urlencode }}&amp;entite={{ c.ids|urlencode }}" title="{{ c.details }}">{{ c.libelle }} <small>({{ c.details }})</small></a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if rep.statut == "entite_inconnue" and rep.resolution.suggestions %}
+      <div class="panneau">
+        <h2>Valeurs connues dans l'ontologie</h2>
+        <div class="exemples">
+          {% for s in rep.resolution.suggestions %}<span class="puce puce-fixe">{{ s }}</span>{% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if rep.intention %}
+      <div class="panneau">
+        <h2>1. Analyse linguistique</h2>
+        <div class="grille-analyse">
+          <div><span class="etiquette">Question nettoyée</span><br>{{ rep.nettoyee }}</div>
+          <div><span class="etiquette">Intention détectée</span><br>
+            <span class="badge statut-indemnise">{{ rep.intention.libelle }}</span> <span class="mono">{{ rep.intention.nom }}</span>
+            &nbsp;score {{ rep.score|floatformat:"-1" }}</div>
+          <div><span class="etiquette">Signaux (lemmes / formes)</span><br>
+            {% for s in rep.signaux %}<span class="badge badge-infere">{{ s }}</span> {% endfor %}</div>
+          <div><span class="etiquette">Mention extraite</span><br>
+            {% if rep.mention %}<strong>« {{ rep.mention }} »</strong>
+              {% if rep.confirmee_ner %}<span class="badge statut-declare">confirmée par la NER spaCy</span>{% endif %}
+            {% else %}—{% endif %}</div>
+          <div><span class="etiquette">Entité résolue dans l'ontologie</span><br>
+            {% for e in rep.entites %}<span class="badge statut-en-expertise">{{ e.id }}</span> {% empty %}—{% endfor %}
+            {% if rep.entites %}<small>correspondance {{ rep.niveau_resolution }}/3</small>{% endif %}</div>
+          <div><span class="etiquette">Entités nommées spaCy</span><br>
+            {% for t, l in rep.entites_nommees %}<span class="badge badge-infere">{{ t }} · {{ l }}</span> {% empty %}—{% endfor %}</div>
+        </div>
+        {% for a in rep.avertissements %}<p class="indice">⚠ {{ a }}</p>{% endfor %}
+
+        <details>
+          <summary>Scores de toutes les intentions et jetons spaCy</summary>
+          <div class="carte-tableau">
+            <table>
+              <tr><th>Intention</th><th>Score</th><th>Signaux</th></tr>
+              {% for s in rep.scores %}
+                <tr><td>{{ s.intention.libelle }}</td><td>{{ s.score|floatformat:"-1" }}</td><td>{{ s.signaux|join:" · "|default:"—" }}</td></tr>
+              {% endfor %}
+            </table>
+          </div>
+          <div class="carte-tableau">
+            <table>
+              <tr><th>Jeton</th><th>Lemme</th><th>Catégorie</th><th>Mot vide</th></tr>
+              {% for j in rep.jetons %}
+                <tr><td>{{ j.texte }}</td><td>{{ j.lemme }}</td><td class="mono">{{ j.pos }}</td><td>{% if j.mot_vide %}oui{% else %}—{% endif %}</td></tr>
+              {% endfor %}
+            </table>
+          </div>
+        </details>
+      </div>
+    {% endif %}
+
+    {% if rep.requete %}
+      <div class="panneau">
+        <h2>2. Requête SPARQL générée</h2>
+        <p class="indice">Template SPARQL : seuls des identifiants d'individus validés dans l'ontologie y sont insérés (aucun texte libre).</p>
+        <pre class="sparql">{{ rep.requete }}</pre>
+      </div>
+
+      <div class="panneau">
+        <h2>3. Résultats</h2>
+        <div class="carte-tableau">
+          <table>
+            <tr>{% for c in rep.colonnes %}<th>{{ c }}</th>{% endfor %}</tr>
+            {% for l in rep.lignes %}
+              <tr>{% for v in l.values %}<td>{% if forloop.first %}<strong>{{ v|default:"—" }}</strong>{% else %}{{ v|default:"—" }}{% endif %}</td>{% endfor %}</tr>
+            {% empty %}
+              <tr><td colspan="{{ rep.colonnes|length }}" class="vide">Aucun résultat.</td></tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endblock %}
