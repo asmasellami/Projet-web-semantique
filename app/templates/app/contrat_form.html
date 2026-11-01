@@ -46,6 +46,15 @@
     <label class="case">
       <input type="checkbox" name="tacite" {% if v.tacite %}checked{% endif %}> Renouvellement tacite
     </label>
+    {% for c in relations %}
+      <label class="large">{{ c.libelle }}
+        <select name="{{ c.cle }}" {% if not c.unique %}multiple size="4"{% endif %}>
+          {% if c.unique %}<option value="">— aucune —</option>{% endif %}
+          {% for id, nom, choisi in c.options %}<option value="{{ id }}" {% if choisi %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+        </select>
+        {% if not c.unique %}<small>Ctrl + clic pour en choisir plusieurs.</small>{% endif %}
+      </label>
+    {% endfor %}
     </div>
     <div class="formulaire-actions">
       <button type="submit" class="btn">{% if edition %}Enregistrer{% else %}Créer le contrat{% endif %}</button>

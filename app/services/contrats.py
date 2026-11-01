@@ -1,10 +1,22 @@
 """Service ContratAssurance : recherche, filtrage et CRUD sur Fuseki."""
 from app.sparql_service import query
-from . import rdf
+from . import crud, rdf
 
 TYPES = {"ContratAuto": "Auto", "ContratHabitation": "Habitation", "ContratSante": "Santé"}
 STATUTS = ["Actif", "Expiré", "Résilié", "Suspendu"]
 MODES = ["Annuel", "Semestriel", "Trimestriel", "Mensuel"]
+
+# Relations du contrat, gérées par le moteur générique (le formulaire reste écrit à la main).
+ENTITE_REL = crud.Entite(
+    slug="contrats", classe="ContratAssurance", singulier="contrat", pluriel="Contrats", module="",
+    champs=[
+        crud.Champ("couvreBien", "Biens couverts", "relation", cible="BienAssure"),
+        crud.Champ("estSouscritPar", "Souscripteur(s)", "relation", cible="Assure", inverse="souscrit"),
+        crud.Champ("estEmisPar", "Compagnie émettrice", "relation", cible="CompagnieAssurance",
+                   inverse="emet", unique=True),
+        crud.Champ("inclutGarantie", "Garanties incluses", "relation", cible="Garantie"),
+    ],
+)
 
 
 def lister(recherche="", type_="", statut="", mode="", prime_min="", prime_max=""):
@@ -79,7 +91,12 @@ def charger(ident):
     """)
     v = {rdf.local(r["p"]["value"]): r["o"]["value"] for r in rows}
     types = query(f"SELECT ?t WHERE {{ :{ident} a ?t . VALUES ?t {{ {' '.join(':' + t for t in TYPES)} }} }}")
+    props = " ".join(f":{c.cle}" for c in ENTITE_REL.champs)
+    liens = {}
+    for r in query(f"SELECT ?p ?o WHERE {{ :{ident} ?p ?o . VALUES ?p {{ {props} }} }}"):
+        liens.setdefault(rdf.local(r["p"]["value"]), []).append(rdf.local(r["o"]["value"]))
     return {
+        "relations": liens,
         "type": rdf.local(types[0]["t"]["value"]) if types else "",
         "numero": v.get("numeroContrat", ""),
         "statut": v.get("statutContrat", ""),
@@ -105,7 +122,7 @@ def valider(post):
         "mode": post.get("mode", ""),
         "tacite": post.get("tacite") == "on",
     }
-    erreurs = []
+    _, v["relations"], erreurs = crud.valider(ENTITE_REL, post)
     if v["type"] not in TYPES:
         erreurs.append("Choisissez un type de contrat.")
     if not v["numero"]:
@@ -161,11 +178,13 @@ def creer(v):
     if rdf.existe(ident):
         return None
     rdf.creer(ident, ["ContratAssurance", v["type"]], _proprietes(v))
+    crud.ecrire_relations(ENTITE_REL, ident, "", v["relations"], remplacer=False)
     return ident
 
 
 def modifier(ident, v, ancien_type):
     rdf.remplacer(ident, _proprietes(v))
+    crud.ecrire_relations(ENTITE_REL, ident, "", v["relations"], remplacer=True)
     if v["type"] != ancien_type:
         from app.sparql_service import update
         retire = f"DELETE DATA {{ :{ident} a :{ancien_type} }} ;\n" if ancien_type in TYPES else ""

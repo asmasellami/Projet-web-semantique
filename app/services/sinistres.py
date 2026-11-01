@@ -22,6 +22,8 @@ SINISTRE = Entite(
         Champ("concerneContrat", "Contrat concerné", "relation", cible="ContratAssurance",
               inverse="estConcerneParSinistre"),
         Champ("concerneBien", "Bien concerné", "relation", cible="BienAssure"),
+        Champ("garantieMobilisable", "Garantie(s) mobilisable(s)", "relation", cible="Garantie"),
+        Champ("estEvalueePar", "Expertise(s)", "relation", cible="Expertise"),
         Champ("impliqueAssure", "Assuré(s) impliqué(s)", "relation", cible="Assure", inverse="aConnuSinistre"),
     ],
 )

@@ -89,17 +89,64 @@ def creer(sujet, classes, props):
     update("INSERT DATA {\n" + " .\n".join(lignes) + " .\n}")
 
 
+def _termes(b):
+    """Écritures SPARQL possibles d'une valeur renvoyée par Fuseki.
+
+    Jena ne retrouve pas toujours un décimal stocké (« 500 ») avec un motif à variable
+    (`DELETE WHERE { ?s ?p ?o }`) : on supprime donc avec DELETE DATA, en essayant
+    plusieurs écritures du même nombre.
+    """
+    if b["type"] == "uri":
+        return [f"<{b['value']}>"]
+    if b["type"] != "literal":
+        return []
+    valeurs = [b["value"]]
+    dt = b.get("datatype", "")
+    if dt.endswith("#decimal"):
+        try:
+            d = Decimal(b["value"])
+            valeurs += [format(d.normalize(), "f"), format(d, "f"), f"{d:.1f}"]
+        except InvalidOperation:
+            pass
+    termes = []
+    for v in dict.fromkeys(valeurs):
+        lex = (v.replace("\\", "\\\\").replace('"', '\\"')
+                .replace("\n", "\\n").replace("\r", "\\r"))
+        if "xml:lang" in b:
+            termes.append(f'"{lex}"@{b["xml:lang"]}')
+        elif dt:
+            termes.append(f'"{lex}"^^<{dt}>')
+        else:
+            termes.append(f'"{lex}"')
+    return termes
+
+
+def _effacer(sujet, props=None):
+    """Supprime les valeurs de `sujet` (toutes, ou celles des propriétés données)."""
+    filtre = ""
+    if props:
+        filtre = "VALUES ?p { " + " ".join(f":{p}" for p in props) + " }"
+    triples = []
+    for r in query(f"SELECT ?p ?o WHERE {{ :{sujet} ?p ?o . {filtre} }}"):
+        for terme in _termes(r["o"]):
+            triples.append(f":{sujet} <{r['p']['value']}> {terme} .")
+    if triples:
+        update("DELETE DATA {\n" + "\n".join(triples) + "\n}")
+
+
 def remplacer(sujet, props):
     """Remplace toutes les valeurs des propriétés données (None = simple suppression)."""
+    _effacer(sujet, list(props))
     ops = []
     for p, v in props.items():
-        ops.append(f"DELETE WHERE {{ :{sujet} :{p} ?o }}")
         for x in _valeurs(v):
             if x is not None:
                 ops.append(f"INSERT DATA {{ :{sujet} :{p} {x} }}")
-    update(" ;\n".join(ops))
+    if ops:
+        update(" ;\n".join(ops))
 
 
 def supprimer(sujet):
     """Supprime l'individu et toutes les références vers lui."""
-    update(f"DELETE WHERE {{ :{sujet} ?p ?o }} ;\nDELETE WHERE {{ ?s ?p :{sujet} }}")
+    _effacer(sujet)
+    update(f"DELETE WHERE {{ ?s ?p :{sujet} }}")

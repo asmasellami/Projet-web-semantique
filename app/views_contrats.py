@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
-from .services import contrats, rdf
+from .services import contrats, crud, rdf
 
 
 def liste_contrats(request):
@@ -38,7 +38,7 @@ def _formulaire(request, ident=None):
         ancien_type = valeurs["type"]
     else:
         valeurs = {"type": "", "numero": "", "statut": "Actif", "prime": "", "date_debut": "",
-                   "date_fin": "", "date_signature": "", "mode": "Annuel", "tacite": False}
+                   "date_fin": "", "date_signature": "", "mode": "Annuel", "tacite": False, "relations": {}}
     erreurs = []
 
     if request.method == "POST":
@@ -57,7 +57,8 @@ def _formulaire(request, ident=None):
                 erreurs.append("Fuseki est injoignable (écriture impossible).")
 
     return render(request, "app/contrat_form.html", {
-        "v": valeurs, "erreurs": erreurs, "edition": bool(ident), "ident": ident,
+        "v": valeurs, "erreurs": erreurs,
+        "relations": crud.groupes_formulaire(contrats.ENTITE_REL, valeurs.get("relations", {}), "")[0]["champs"], "edition": bool(ident), "ident": ident,
         "types": contrats.TYPES, "statuts": contrats.STATUTS, "modes": contrats.MODES,
     })
 

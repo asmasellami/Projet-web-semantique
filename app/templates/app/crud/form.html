@@ -46,7 +46,8 @@
                 {% for x in c.choix %}<option value="{{ x }}" {% if x == c.valeur %}selected{% endif %}>{{ x }}</option>{% endfor %}
               </select>
             {% elif c.genre == "relation" %}
-              <select name="{{ c.cle }}" multiple size="4" {% if g.code %}disabled{% endif %}>
+              <select name="{{ c.cle }}" {% if not c.unique %}multiple size="4"{% endif %} {% if g.code %}disabled{% endif %}>
+                {% if c.unique %}<option value="">— aucun —</option>{% endif %}
                 {% for id, nom, choisi in c.options %}<option value="{{ id }}" {% if choisi %}selected{% endif %}>{{ nom }}</option>{% endfor %}
               </select>
             {% elif c.genre == "booleen" %}
@@ -58,7 +59,7 @@
                      {% if c.obligatoire %}{% if g.code %}data-requis{% else %}required{% endif %}{% endif %}
                      {% if edition and c.cle == e.cle %}readonly{% endif %}>
             {% endif %}
-            {% if c.genre == "relation" %}<small>Ctrl + clic pour en choisir plusieurs.</small>{% endif %}
+            {% if c.genre == "relation" and not c.unique %}<small>Ctrl + clic pour en choisir plusieurs.</small>{% endif %}
           </label>
         {% endfor %}
       </div>

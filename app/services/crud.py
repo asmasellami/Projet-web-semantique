@@ -23,6 +23,7 @@ class Champ:
     pour: tuple = ()          # sous-types concernés ; vide = tous
     liste: bool = False       # colonne du tableau
     filtre: bool = False      # filtre déroulant (genre "choix")
+    unique: bool = False      # relation fonctionnelle : une seule valeur autorisée
 
 
 @dataclass
@@ -210,6 +211,8 @@ def valider(e, post, type_force=None):
             choisis = post.getlist(c.cle)
             if any(x not in autorises for x in choisis):
                 erreurs.append(f"« {c.libelle} » : valeur inconnue.")
+            if c.unique and len(choisis) > 1:
+                erreurs.append(f"« {c.libelle} » : une seule valeur est autorisée.")
             valeurs[c.cle] = choisis
         elif c.genre == "booleen":
             valeurs[c.cle] = post.get(c.cle) == "on"
@@ -268,6 +271,9 @@ def _relations(e, ident, type_, valeurs, remplacer):
         update(" ;\n".join(ops))
 
 
+ecrire_relations = _relations
+
+
 def creer(e, type_, valeurs):
     """Crée l'individu ; retourne son id, ou None s'il existe déjà."""
     if e.cle:
@@ -310,7 +316,7 @@ def groupes_formulaire(e, valeurs, type_):
             actif = code == "" or code == type_
             v = valeurs.get(c.cle) if actif else None
             item = {"cle": c.cle, "libelle": c.libelle, "genre": c.genre,
-                    "obligatoire": c.obligatoire, "choix": c.choix, "valeur": v if v is not None else ""}
+                    "obligatoire": c.obligatoire, "choix": c.choix, "unique": c.unique, "valeur": v if v is not None else ""}
             if c.genre == "relation":
                 choisis = v or []
                 item["options"] = [(i, nom, i in choisis) for i, nom in opts(c.cible)]
