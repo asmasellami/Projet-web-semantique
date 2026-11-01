@@ -4,6 +4,7 @@
 {% block nav_contrats %}actif{% endblock %}
 
 {% block contenu %}
+  <a class="retour" href="{% url 'contrats' %}">← Retour à la liste</a>
   <h1>{% if edition %}Modifier le contrat{% else %}Nouveau contrat{% endif %}</h1>
   <p class="sous-titre">Les données sont écrites dans l'ontologie via SPARQL Update.</p>
 
@@ -13,6 +14,8 @@
 
   <form method="post" class="formulaire">
     {% csrf_token %}
+    <div class="formulaire-entete">Informations du contrat</div>
+    <div class="formulaire-corps">
     <label>N° de contrat
       <input type="text" name="numero" value="{{ v.numero }}" required {% if edition %}readonly{% endif %}>
     </label>
@@ -43,6 +46,7 @@
     <label class="case">
       <input type="checkbox" name="tacite" {% if v.tacite %}checked{% endif %}> Renouvellement tacite
     </label>
+    </div>
     <div class="formulaire-actions">
       <button type="submit" class="btn">{% if edition %}Enregistrer{% else %}Créer le contrat{% endif %}</button>
       <a href="{% url 'contrats' %}" class="btn btn-secondaire">Annuler</a>

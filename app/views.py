@@ -25,6 +25,13 @@ PAGES_CLASSES = {
     "Sinistre": "sinistres",
     "ContratAssurance": "contrats",
     "BienAssure": "biens",
+    "Dommage": "dommages",
+    "Indemnisation": "indemnisations",
+    "BaremeIndemnisation": "baremes",
+    "Garantie": "garanties",
+    "Clause": "clauses",
+    "Acteur": "acteurs",
+    "Expertise": "expertises",
 }
 
 
@@ -57,7 +64,7 @@ def liste_sinistres(request):
         filtres += f"FILTER(?type = :{type_choisi})\n"
 
     rows = query(f"""
-        SELECT ?num ?type ?statut ?lieu ?date ?score
+        SELECT ?s ?num ?type ?statut ?lieu ?date ?score
                (GROUP_CONCAT(DISTINCT ?catName; separator=",") AS ?categories)
         WHERE {{
             ?s :numeroDossier ?num ;
@@ -74,7 +81,7 @@ def liste_sinistres(request):
             }}
             {filtres}
         }}
-        GROUP BY ?num ?type ?statut ?lieu ?date ?score
+        GROUP BY ?s ?num ?type ?statut ?lieu ?date ?score
         ORDER BY DESC(?date)
     """)
 
@@ -84,6 +91,7 @@ def liste_sinistres(request):
         cats = r.get("categories", {}).get("value", "")
         score = float(r["score"]["value"])
         sinistres.append({
+            "id": r["s"]["value"].split("#")[-1],
             "num": r["num"]["value"],
             "type": LIBELLES_TYPES.get(code_type, code_type),
             "statut": r["statut"]["value"],

@@ -1,0 +1,96 @@
+{% extends "app/base.html" %}
+
+{% block titre %}{% if edition %}Modifier{% else %}Nouveau{% endif %} · {{ e.pluriel }}{% endblock %}
+
+{% block contenu %}
+  <a class="retour" href="{% url e.slug %}">← Retour à la liste</a>
+  <h1>{% if edition %}Modifier : {{ e.singulier }}{% else %}Nouveau : {{ e.singulier }}{% endif %}</h1>
+  <p class="sous-titre">{% block intro %}Les données sont écrites dans l'ontologie via SPARQL Update.{% endblock %}</p>
+
+  {% if erreurs %}
+    <div class="message message-error"><ul>{% for er in erreurs %}<li>{{ er }}</li>{% endfor %}</ul></div>
+  {% endif %}
+
+  <form method="post" class="formulaire">
+    {% csrf_token %}
+    <div class="formulaire-entete">Informations — {{ e.singulier|capfirst }}</div>
+    <div class="formulaire-corps">
+
+    {% if e.sous_types %}
+      <label>Type
+        {% if edition %}
+          <input type="text" readonly value="{% for code, nom in e.sous_types.items %}{% if code == type %}{{ nom }}{% endif %}{% endfor %}">
+          <input type="hidden" id="champ-type" value="{{ type }}">
+        {% else %}
+          <select name="type" id="champ-type" required>
+            <option value="">— choisir —</option>
+            {% for code, nom in e.sous_types.items %}<option value="{{ code }}" {% if code == type %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+          </select>
+        {% endif %}
+      </label>
+    {% endif %}
+
+    {% if e.sous_types and not edition %}
+      <p class="indice" id="indice-type">Choisissez d'abord un type : ses champs spécifiques s'afficheront ici.</p>
+    {% endif %}
+
+    {% for g in groupes %}
+      <div class="groupe-champs" data-type="{{ g.code }}" {% if g.code %}hidden{% endif %}>
+        {% for c in g.champs %}
+          <label class="{% if c.genre == 'zone' or c.genre == 'relation' %}large{% endif %}">{{ c.libelle }}{% if c.obligatoire %} *{% endif %}
+            {% if c.genre == "zone" %}
+              <textarea name="{{ c.cle }}" rows="3" {% if g.code %}disabled{% endif %} {% if c.obligatoire %}data-requis{% endif %}>{{ c.valeur }}</textarea>
+            {% elif c.genre == "choix" %}
+              <select name="{{ c.cle }}" {% if g.code %}disabled{% endif %}>
+                <option value="">—</option>
+                {% for x in c.choix %}<option value="{{ x }}" {% if x == c.valeur %}selected{% endif %}>{{ x }}</option>{% endfor %}
+              </select>
+            {% elif c.genre == "relation" %}
+              <select name="{{ c.cle }}" multiple size="4" {% if g.code %}disabled{% endif %}>
+                {% for id, nom, choisi in c.options %}<option value="{{ id }}" {% if choisi %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+              </select>
+            {% elif c.genre == "booleen" %}
+              <input type="checkbox" name="{{ c.cle }}" {% if c.valeur is True %}checked{% endif %} {% if g.code %}disabled{% endif %}>
+            {% else %}
+              <input name="{{ c.cle }}" value="{{ c.valeur }}" {% if g.code %}disabled{% endif %}
+                     type="{% if c.genre == 'date' %}date{% elif c.genre == 'entier' or c.genre == 'decimal' %}number{% else %}text{% endif %}"
+                     {% if c.genre == 'decimal' %}step="any"{% endif %}
+                     {% if c.obligatoire %}{% if g.code %}data-requis{% else %}required{% endif %}{% endif %}
+                     {% if edition and c.cle == e.cle %}readonly{% endif %}>
+            {% endif %}
+            {% if c.genre == "relation" %}<small>Ctrl + clic pour en choisir plusieurs.</small>{% endif %}
+          </label>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    </div>
+    <div class="formulaire-actions">
+      <button type="submit" class="btn">{% if edition %}Enregistrer{% else %}Créer{% endif %}</button>
+      <a href="{% url e.slug %}" class="btn btn-secondaire">Annuler</a>
+    </div>
+  </form>
+
+  <script>
+    // N'active (et ne soumet) que les champs du type choisi.
+    (function () {
+      const choix = document.getElementById("champ-type");
+      function afficher() {
+        document.querySelectorAll(".groupe-champs[data-type]").forEach(g => {
+          if (!g.dataset.type) return;
+          const actif = choix && g.dataset.type === choix.value;
+          g.hidden = !actif;
+          g.querySelectorAll("input, select, textarea").forEach(el => {
+            el.disabled = !actif;
+            if (el.hasAttribute("data-requis")) el.required = actif;
+          });
+        });
+      }
+      function indice() {
+        const i = document.getElementById("indice-type");
+        if (i) i.hidden = !!(choix && choix.value);
+      }
+      if (choix) { choix.addEventListener("change", () => { afficher(); indice(); }); afficher(); indice(); }
+    })();
+  </script>
+{% endblock %}

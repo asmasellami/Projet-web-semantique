@@ -4,6 +4,7 @@
 {% block nav_biens %}actif{% endblock %}
 
 {% block contenu %}
+  <a class="retour" href="{% url 'biens' %}">← Retour à la liste</a>
   <h1>{% if edition %}Modifier le bien{% else %}Nouveau bien{% endif %}</h1>
   <p class="sous-titre">Les champs affichés dépendent du type de bien.</p>
 
@@ -13,6 +14,8 @@
 
   <form method="post" class="formulaire">
     {% csrf_token %}
+    <div class="formulaire-entete">Informations du bien</div>
+    <div class="formulaire-corps">
     <label>Type de bien
       {% if edition %}
         <input type="text" value="{% for code, nom in types.items %}{% if code == type %}{{ nom }}{% endif %}{% endfor %}" readonly>
@@ -49,6 +52,7 @@
       </div>
     {% endfor %}
 
+    </div>
     <div class="formulaire-actions">
       <button type="submit" class="btn">{% if edition %}Enregistrer{% else %}Créer le bien{% endif %}</button>
       <a href="{% url 'biens' %}" class="btn btn-secondaire">Annuler</a>
