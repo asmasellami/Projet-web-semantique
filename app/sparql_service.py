@@ -1,9 +1,11 @@
+import os
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
-FUSEKI = "http://localhost:3030/assurance"
+# Surchargeable (ex. dataset de test isolé) : FUSEKI_URL=http://localhost:3030/assurance_member3_test
+FUSEKI = os.environ.get("FUSEKI_URL", "http://localhost:3030/assurance")
 
 PREFIX = (
     "PREFIX : <http://www.esprit.tn/ontologies/assurance-sinistres#>\n"

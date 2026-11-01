@@ -4,6 +4,7 @@ from urllib.error import URLError
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_POST
 
 from .services import crud, rdf
@@ -14,6 +15,14 @@ def _entite(slug):
     if slug not in REGISTRE:
         raise Http404("Entité inconnue")
     return REGISTRE[slug]
+
+
+def _retour(request, e):
+    """Redirection après une action : page d'origine (paramètre next, interne au site) ou liste de l'entité."""
+    suivant = request.GET.get("next") or request.POST.get("next") or ""
+    if suivant and url_has_allowed_host_and_scheme(suivant, allowed_hosts={request.get_host()}):
+        return redirect(suivant)
+    return redirect(e.slug)
 
 
 def liste(request, slug):
@@ -41,18 +50,20 @@ def _formulaire(request, slug, ident=None):
         if charge is None:
             raise Http404(f"{e.singulier.capitalize()} introuvable")
         type_, valeurs = charge
+    elif request.GET.get("type") in e.sous_types:
+        type_ = request.GET["type"]   # lien « Nouvel assuré » : type présélectionné
 
     if request.method == "POST":
-        type_, valeurs, erreurs = crud.valider(e, request.POST, type_force=type_ if ident else None)
+        type_, valeurs, erreurs = crud.valider(e, request.POST, type_force=type_ if ident else None, ident=ident)
         if not erreurs:
             try:
                 if ident:
                     crud.modifier(e, ident, type_, valeurs)
                     messages.success(request, f"{e.singulier.capitalize()} {e.modifie}.")
-                    return redirect(e.slug)
+                    return _retour(request, e)
                 if crud.creer(e, type_, valeurs):
                     messages.success(request, f"{e.singulier.capitalize()} {e.cree}.")
-                    return redirect(e.slug)
+                    return _retour(request, e)
                 erreurs.append("Cet élément existe déjà (même identifiant).")
             except URLError:
                 erreurs.append("Fuseki est injoignable (écriture impossible).")
@@ -80,4 +91,4 @@ def supprimer(request, slug, ident):
         messages.success(request, f"{e.singulier.capitalize()} {e.supprime}.")
     except URLError:
         messages.error(request, "Fuseki est injoignable (suppression impossible).")
-    return redirect(e.slug)
+    return _retour(request, e)

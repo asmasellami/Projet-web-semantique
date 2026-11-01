@@ -27,11 +27,17 @@
         </select>
       {% endif %}
     </label>
-    <label>Propriétaire
-      <select name="proprietaire">
-        <option value="">— aucun —</option>
-        {% for id, nom in proprietaires %}<option value="{{ id }}" {% if id == proprio %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+    <label>Propriétaire(s)
+      <select name="proprietaire" multiple size="4">
+        {% for id, nom in proprietaires %}<option value="{{ id }}" {% if id in proprios %}selected{% endif %}>{{ nom }}</option>{% endfor %}
       </select>
+      <small>Relation <code>appartientA</code> (inverse <code>estProprietaireDe</code>). Ctrl + clic pour en choisir plusieurs.</small>
+    </label>
+    <label>Contrat(s) couvrant ce bien
+      <select name="contrats" multiple size="4">
+        {% for id, nom in contrats %}<option value="{{ id }}" {% if id in liens %}selected{% endif %}>{{ nom }}</option>{% endfor %}
+      </select>
+      <small>Relation <code>couvreBien</code> (portée par le contrat).</small>
     </label>
 
     {% for g in groupes %}
@@ -40,6 +46,7 @@
           <label>{{ c.nom }}
             {% if c.genre == "choix" %}
               <select name="{{ c.cle }}" disabled>
+                <option value="">—</option>
                 {% for t in types_logement %}<option value="{{ t }}" {% if t == c.valeur %}selected{% endif %}>{{ t }}</option>{% endfor %}
               </select>
             {% else %}

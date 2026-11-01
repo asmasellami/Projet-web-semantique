@@ -30,28 +30,29 @@ def liste_biens(request):
 
 
 def _formulaire(request, ident=None):
-    type_, valeurs, proprio = "", {}, ""
+    type_, valeurs, proprios, liens = "", {}, [], []
     if ident:
         rdf.identifiant_valide(ident)
         charge = biens.charger(ident)
         if charge is None:
             raise Http404("Bien introuvable")
-        type_, valeurs, owners = charge
-        proprio = owners[0] if owners else ""
+        type_, valeurs, proprios, liens = charge
+    elif request.GET.get("type") in biens.TYPES:
+        type_ = request.GET["type"]   # type présélectionné par un lien
     erreurs = []
 
     if request.method == "POST":
         if ident:
             request.POST = request.POST.copy()
             request.POST["type"] = type_  # le type ne change pas en édition
-        type_, valeurs, proprio, erreurs = biens.valider(request.POST)
+        type_, valeurs, proprios, liens, erreurs = biens.valider(request.POST, ident)
         if not erreurs:
             try:
                 if ident:
-                    biens.modifier(ident, type_, valeurs, proprio)
+                    biens.modifier(ident, type_, valeurs, proprios, liens)
                     messages.success(request, "Bien modifié.")
                     return redirect("biens")
-                if biens.creer(type_, valeurs, proprio):
+                if biens.creer(type_, valeurs, proprios, liens):
                     messages.success(request, "Bien créé.")
                     return redirect("biens")
                 erreurs.append("Ce bien existe déjà.")
@@ -66,10 +67,10 @@ def _formulaire(request, ident=None):
     } for code in biens.TYPES]
 
     return render(request, "app/bien_form.html", {
-        "type": type_, "proprio": proprio, "erreurs": erreurs,
+        "type": type_, "proprios": proprios, "liens": liens, "erreurs": erreurs,
         "edition": bool(ident), "ident": ident,
         "types": biens.TYPES, "groupes": groupes, "types_logement": biens.TYPES_LOGEMENT,
-        "proprietaires": biens.proprietaires(),
+        "proprietaires": biens.proprietaires(), "contrats": biens.contrats(),
     })
 
 

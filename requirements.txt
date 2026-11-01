@@ -1,0 +1,7 @@
+# Dépendances du projet Assurance & Sinistres (versions testées entre parenthèses)
+Django>=5.2,<5.3          # 5.2.18
+SPARQLWrapper>=2.0,<3     # 2.0.0 (installe rdflib 7.x)
+spacy>=3.8,<3.9           # 3.8.18 — module NLP (app/nlp.py)
+
+# Modèle français de spaCy (3.8.0), à installer après les dépendances :
+#   python -m spacy download fr_core_news_sm

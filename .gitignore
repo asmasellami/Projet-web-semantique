@@ -5,3 +5,9 @@ db.sqlite3
 .env
 .vscode/
 .idea/
+
+# Références locales du membre 3
+/docs/references/
+
+# Environnement Python
+/.venv/

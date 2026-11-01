@@ -6,6 +6,7 @@ modification, suppression). Aucune requête SPARQL à écrire à la main.
 """
 import uuid
 from dataclasses import dataclass, field
+from decimal import Decimal
 
 from app.sparql_service import query, update
 from . import rdf
@@ -24,6 +25,8 @@ class Champ:
     liste: bool = False       # colonne du tableau
     filtre: bool = False      # filtre déroulant (genre "choix")
     unique: bool = False      # relation fonctionnelle : une seule valeur autorisée
+    minimum: float | None = None   # bornes numériques (facettes OWL), genres entier / decimal
+    maximum: float | None = None
 
 
 @dataclass
@@ -41,6 +44,8 @@ class Entite:
     champ_montant: str = ""   # champ numérique filtrable (min / max)
     feminin: bool = False
     liste_perso: bool = False  # la page liste existe déjà (route écrite à la main)
+    prefixe_par_type: bool = False   # identifiant préfixé par le sous-type (Assure_Ahmed) et non par la classe
+    verifier: object = None   # contrôles métier optionnels : verifier(type, valeurs, ident) -> [erreurs]
 
     @property
     def colonnes(self):
@@ -196,8 +201,20 @@ def charger(e, ident):
 
 
 # ---------- Validation ----------
-def valider(e, post, type_force=None):
-    """Retourne (type, valeurs, erreurs). type_force : type imposé en modification."""
+def _borne(c, brut):
+    """Message d'erreur si la valeur sort des bornes (facettes OWL) du champ, sinon None."""
+    if c.minimum is None and c.maximum is None:
+        return None
+    n = Decimal(brut.replace(",", "."))
+    if c.minimum is not None and n < Decimal(str(c.minimum)):
+        return f"« {c.libelle} » doit être supérieur ou égal à {c.minimum}."
+    if c.maximum is not None and n > Decimal(str(c.maximum)):
+        return f"« {c.libelle} » doit être inférieur ou égal à {c.maximum}."
+    return None
+
+
+def valider(e, post, type_force=None, ident=None):
+    """Retourne (type, valeurs, erreurs). type_force : type imposé en modification ; ident : individu édité."""
     type_ = type_force if type_force is not None else post.get("type", "")
     if not e.sous_types:
         type_ = ""
@@ -230,6 +247,11 @@ def valider(e, post, type_force=None):
                 CONVERSION[c.genre](brut)
             except ValueError as err:
                 erreurs.append(f"« {c.libelle} » : {err}")
+                continue
+            if c.genre in ("entier", "decimal") and (hors := _borne(c, brut)):
+                erreurs.append(hors)
+    if e.verifier and not erreurs:
+        erreurs += e.verifier(type_, valeurs, ident)
     return type_, valeurs, erreurs
 
 
@@ -277,7 +299,7 @@ ecrire_relations = _relations
 def creer(e, type_, valeurs):
     """Crée l'individu ; retourne son id, ou None s'il existe déjà."""
     if e.cle:
-        ident = rdf.fabriquer_id(e.classe, valeurs[e.cle])
+        ident = rdf.fabriquer_id(type_ if e.prefixe_par_type and type_ else e.classe, valeurs[e.cle])
     else:
         ident = f"{e.classe}_{uuid.uuid4().hex[:8]}"
     if rdf.existe(ident):
