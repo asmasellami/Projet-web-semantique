@@ -1,0 +1,116 @@
+[
+  {
+    "id": "biens_assure-fr-8-0",
+    "text": "Que possède Ahmed ?",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-en-8-0",
+    "text": "What does Ahmed own?",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-en-8-1",
+    "text": "What does Salma own?",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-en-8-2",
+    "text": "What does Youssef own?",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-en-9-0",
+    "text": "I would like the assets covered by policies held by Ahmed",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-en-9-1",
+    "text": "I would like the assets covered by policies held by Salma",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-en-9-2",
+    "text": "I would like the assets covered by policies held by Youssef",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-8-0",
+    "text": "Ahmed chnowa yomlek",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "clauses_contrat-en-9-0",
+    "text": "I would like the terms of contract AUTO-2026-001",
+    "expected": "clauses_contrat",
+    "predicted": "garanties_contrat"
+  },
+  {
+    "id": "clauses_contrat-en-9-1",
+    "text": "I would like the terms of contract HAB-2026-014",
+    "expected": "clauses_contrat",
+    "predicted": "garanties_contrat"
+  },
+  {
+    "id": "clauses_contrat-en-9-2",
+    "text": "I would like the terms of contract SANTE-2026-031",
+    "expected": "clauses_contrat",
+    "predicted": "garanties_contrat"
+  },
+  {
+    "id": "indemnisation_sinistre-en-9-0",
+    "text": "I would like the payment details of S001",
+    "expected": "indemnisation_sinistre",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "indemnisation_sinistre-en-9-1",
+    "text": "I would like the payment details of S002",
+    "expected": "indemnisation_sinistre",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "indemnisation_sinistre-en-9-2",
+    "text": "I would like the payment details of S003",
+    "expected": "indemnisation_sinistre",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "negative-fr-28",
+    "text": "Combien de sinistres sont à Tunis ?",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-en-28",
+    "text": "How many claims are in Tunis?",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-tn-Arabizi-28",
+    "text": "9adech men sinistre fi Tunis",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-en-29",
+    "text": "Compare insurer prices",
+    "expected": "unsupported",
+    "predicted": "assures_compagnie"
+  },
+  {
+    "id": "negative-tn-Arabizi-29",
+    "text": "9aren les tarifs mta3 compagnies",
+    "expected": "unsupported",
+    "predicted": "assures_compagnie"
+  }
+]

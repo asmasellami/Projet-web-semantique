@@ -68,13 +68,36 @@ class NonRegressionTests(FusekiIsole):
     def test_identifiants_classe_conserves_pour_les_autres_entites(self):
         # prefixe_par_type n'est activé que pour les acteurs : les autres entités gardent leur préfixe de classe.
         self.client.post("/sinistres/nouveau/", {
-            "type": "Vol", "numeroDossier": "SIN-TEST-1", "statutDossier": "Déclaré", "dateSinistre": "2026-10-01"})
+            "type": "Vol", "numeroDossier": "SIN-TEST-1", "statutDossier": "Déclaré", "dateSinistre": "2026-10-01",
+            "lieuSinistre": "Tunis", "scoreRisqueFraude": "0.1"})
         self.assertTrue(self.existe(":Sinistre_SIN_TEST_1 a :Sinistre, :Vol"))
 
     def test_creation_acteur_ne_change_pas_les_autres_classes(self):
         avant = len(self.ask("SELECT ?s WHERE { ?s a :Sinistre }"))
         self.client.post("/acteurs/nouveau/", {"type": "Beneficiaire", "nom": "Test Reg"})
         self.assertEqual(len(self.ask("SELECT ?s WHERE { ?s a :Sinistre }")), avant)
+
+    def test_sinistre_exige_lieu_et_score_pour_rester_visible(self):
+        donnees = {"type": "Vol", "numeroDossier": "SIN-REQUIS", "statutDossier": "Déclaré",
+                   "dateSinistre": "2026-10-01", "lieuSinistre": "Tunis", "scoreRisqueFraude": "0"}
+        for champ in ("lieuSinistre", "scoreRisqueFraude"):
+            for valeur in (None, "", "   "):
+                with self.subTest(champ=champ, valeur=valeur):
+                    post = dict(donnees)
+                    if valeur is None:
+                        post.pop(champ)
+                    else:
+                        post[champ] = valeur
+                    r = self.client.post("/sinistres/nouveau/", post)
+                    self.assertContains(r, "est obligatoire")
+                    self.assertFalse(self.existe(':Sinistre_SIN_REQUIS a :Sinistre'))
+        r = self.client.post("/sinistres/nouveau/", donnees)
+        self.assertEqual(r.status_code, 302)
+        self.assertContains(self.client.get("/sinistres/"), "SIN-REQUIS")
+        r = self.client.post("/sinistres/Sinistre_SIN_REQUIS/modifier/",
+                             {**donnees, "lieuSinistre": "", "scoreRisqueFraude": ""})
+        self.assertContains(r, "est obligatoire")
+        self.assertContains(self.client.get("/sinistres/"), "SIN-REQUIS")
 
 
 class FusekiArreteTests(FusekiIsole):

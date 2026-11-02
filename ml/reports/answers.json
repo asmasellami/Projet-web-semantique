@@ -1,0 +1,613 @@
+{
+  "provenance": "AI-authored independent challenge; not native-reviewed; small sample, not population accuracy",
+  "dataset_triplets_before": "2651",
+  "dataset_triplets_after": "2651",
+  "summary": {
+    "fr": {
+      "supported_n": 10,
+      "correct_answers": 9,
+      "negative_n": 2,
+      "correct_rejections": 2
+    },
+    "en": {
+      "supported_n": 10,
+      "correct_answers": 8,
+      "negative_n": 2,
+      "correct_rejections": 2
+    },
+    "tn-Arabizi": {
+      "supported_n": 10,
+      "correct_answers": 10,
+      "negative_n": 2,
+      "correct_rejections": 2
+    },
+    "latency": {
+      "cold_ms": 7495.6,
+      "warm_median_ms": 41.6,
+      "warm_p95_ms": 71.11999999999999
+    }
+  },
+  "records": [
+    {
+      "language": "fr",
+      "question": "Quels objets sont couverts par les polices de Ahmed ?",
+      "expected_intent": "biens_assure",
+      "predicted_intent": "contrats_assure",
+      "status": "ok",
+      "correct": false,
+      "expected_items": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "actual_items": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "ms": 7495.6,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Please retrieve the insured property linked to Ahmed.",
+      "expected_intent": "biens_assure",
+      "predicted_intent": "biens_assure",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "actual_items": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "ms": 69.5,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "tnajem twarini chniya les biens couverts mta3 Ahmed",
+      "expected_intent": "biens_assure",
+      "predicted_intent": "biens_assure",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "actual_items": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "ms": 78.3,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les clients assurés auprès de MedAssur.",
+      "expected_intent": "assures_compagnie",
+      "predicted_intent": "assures_compagnie",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Assure_Youssef"
+      ],
+      "actual_items": [
+        "Assure_Youssef"
+      ],
+      "ms": 53.7,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Give me the people insured through MedAssur.",
+      "expected_intent": "assures_compagnie",
+      "predicted_intent": "assures_compagnie",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Assure_Youssef"
+      ],
+      "actual_items": [
+        "Assure_Youssef"
+      ],
+      "ms": 50.2,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "n7eb na3ref chkoun assure chez MedAssur",
+      "expected_intent": "assures_compagnie",
+      "predicted_intent": "assures_compagnie",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Assure_Youssef"
+      ],
+      "actual_items": [
+        "Assure_Youssef"
+      ],
+      "ms": 43.9,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les polices souscrites au nom de Ahmed.",
+      "expected_intent": "contrats_assure",
+      "predicted_intent": "contrats_assure",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual_items": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "ms": 49.8,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve the insurance agreements held by Ahmed.",
+      "expected_intent": "contrats_assure",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": false,
+      "expected_items": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual_items": [],
+      "ms": 14.7,
+      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples."
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "taw warini chnowa les contrats mta3 Ahmed",
+      "expected_intent": "contrats_assure",
+      "predicted_intent": "contrats_assure",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual_items": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "ms": 54.1,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les sinistres localisés à Tunis.",
+      "expected_intent": "sinistres_filtres",
+      "predicted_intent": "sinistres_filtres",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Sinistre_S001",
+        "Sinistre_S004"
+      ],
+      "actual_items": [
+        "Sinistre_S001",
+        "Sinistre_S004"
+      ],
+      "ms": 61.0,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve claims that happened in Tunis.",
+      "expected_intent": "sinistres_filtres",
+      "predicted_intent": "sinistres_filtres",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Sinistre_S001",
+        "Sinistre_S004"
+      ],
+      "actual_items": [
+        "Sinistre_S001",
+        "Sinistre_S004"
+      ],
+      "ms": 36.3,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "n7eb dossiers sinistres elli sarou fi Tunis",
+      "expected_intent": "sinistres_filtres",
+      "predicted_intent": "sinistres_filtres",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Sinistre_S001",
+        "Sinistre_S004"
+      ],
+      "actual_items": [
+        "Sinistre_S001",
+        "Sinistre_S004"
+      ],
+      "ms": 34.9,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les garanties prévues au contrat AUTO-2026-001.",
+      "expected_intent": "garanties_contrat",
+      "predicted_intent": "garanties_contrat",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Garantie_BrisGlace_Auto",
+        "Garantie_RC_Auto"
+      ],
+      "actual_items": [
+        "Garantie_BrisGlace_Auto",
+        "Garantie_RC_Auto"
+      ],
+      "ms": 47.8,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve the guarantees attached to AUTO-2026-001.",
+      "expected_intent": "garanties_contrat",
+      "predicted_intent": "garanties_contrat",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Garantie_BrisGlace_Auto",
+        "Garantie_RC_Auto"
+      ],
+      "actual_items": [
+        "Garantie_BrisGlace_Auto",
+        "Garantie_RC_Auto"
+      ],
+      "ms": 40.9,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "taw chniya garanties elli fi AUTO-2026-001",
+      "expected_intent": "garanties_contrat",
+      "predicted_intent": "garanties_contrat",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Garantie_BrisGlace_Auto",
+        "Garantie_RC_Auto"
+      ],
+      "actual_items": [
+        "Garantie_BrisGlace_Auto",
+        "Garantie_RC_Auto"
+      ],
+      "ms": 40.2,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les clauses inscrites au contrat AUTO-2026-001.",
+      "expected_intent": "clauses_contrat",
+      "predicted_intent": "clauses_contrat",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "actual_items": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "ms": 39.8,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve the terms attached to policy AUTO-2026-001.",
+      "expected_intent": "clauses_contrat",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": false,
+      "expected_items": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "actual_items": [],
+      "ms": 7.2,
+      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples."
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "taw chniya clauses elli fi AUTO-2026-001",
+      "expected_intent": "clauses_contrat",
+      "predicted_intent": "clauses_contrat",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "actual_items": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "ms": 35.4,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les dommages provoqués par S001.",
+      "expected_intent": "dommages_sinistre",
+      "predicted_intent": "dommages_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Dommage_D001",
+        "Dommage_D002"
+      ],
+      "actual_items": [
+        "Dommage_D001",
+        "Dommage_D002"
+      ],
+      "ms": 44.1,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve the damage associated with claim S001.",
+      "expected_intent": "dommages_sinistre",
+      "predicted_intent": "dommages_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Dommage_D001",
+        "Dommage_D002"
+      ],
+      "actual_items": [
+        "Dommage_D001",
+        "Dommage_D002"
+      ],
+      "ms": 38.5,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "taw chnowa les degats elli sababhoum S001",
+      "expected_intent": "dommages_sinistre",
+      "predicted_intent": "dommages_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Dommage_D001",
+        "Dommage_D002"
+      ],
+      "actual_items": [
+        "Dommage_D001",
+        "Dommage_D002"
+      ],
+      "ms": 36.9,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les rapports d’expertise concernant S001.",
+      "expected_intent": "expertises_sinistre",
+      "predicted_intent": "expertises_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Expertise_E001"
+      ],
+      "actual_items": [
+        "Expertise_E001"
+      ],
+      "ms": 43.6,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve expert assessment reports for incident S001.",
+      "expected_intent": "expertises_sinistre",
+      "predicted_intent": "expertises_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Expertise_E001"
+      ],
+      "actual_items": [
+        "Expertise_E001"
+      ],
+      "ms": 43.7,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "taw chkoun 3mal expertise pour S001",
+      "expected_intent": "expertises_sinistre",
+      "predicted_intent": "expertises_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Expertise_E001"
+      ],
+      "actual_items": [
+        "Expertise_E001"
+      ],
+      "ms": 47.9,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les versements d’indemnisation pour S001.",
+      "expected_intent": "indemnisation_sinistre",
+      "predicted_intent": "indemnisation_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Indemnisation_I001"
+      ],
+      "actual_items": [
+        "Indemnisation_I001"
+      ],
+      "ms": 72.2,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve compensation payments made for claim S001.",
+      "expected_intent": "indemnisation_sinistre",
+      "predicted_intent": "indemnisation_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Indemnisation_I001"
+      ],
+      "actual_items": [
+        "Indemnisation_I001"
+      ],
+      "ms": 40.3,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "n7eb na3ref chnowa les paiements mta3 S001",
+      "expected_intent": "indemnisation_sinistre",
+      "predicted_intent": "indemnisation_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Indemnisation_I001"
+      ],
+      "actual_items": [
+        "Indemnisation_I001"
+      ],
+      "ms": 38.5,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Retrouve les barèmes applicables au dossier S001.",
+      "expected_intent": "baremes_sinistre",
+      "predicted_intent": "baremes_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Bareme_Forfait_BrisGlace",
+        "Bareme_Proportionnel_80"
+      ],
+      "actual_items": [
+        "Bareme_Forfait_BrisGlace",
+        "Bareme_Proportionnel_80"
+      ],
+      "ms": 41.6,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "en",
+      "question": "Retrieve the reimbursement scales applicable to S001.",
+      "expected_intent": "baremes_sinistre",
+      "predicted_intent": "baremes_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Bareme_Forfait_BrisGlace",
+        "Bareme_Proportionnel_80"
+      ],
+      "actual_items": [
+        "Bareme_Forfait_BrisGlace",
+        "Bareme_Proportionnel_80"
+      ],
+      "ms": 38.3,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "taw anehom les baremes applicables 3la S001",
+      "expected_intent": "baremes_sinistre",
+      "predicted_intent": "baremes_sinistre",
+      "status": "ok",
+      "correct": true,
+      "expected_items": [
+        "Bareme_Forfait_BrisGlace",
+        "Bareme_Proportionnel_80"
+      ],
+      "actual_items": [
+        "Bareme_Forfait_BrisGlace",
+        "Bareme_Proportionnel_80"
+      ],
+      "ms": 39.6,
+      "message": "Question comprise / Understood / fhemt sou2alek"
+    },
+    {
+      "language": "fr",
+      "question": "Bonjour, raconte une blague.",
+      "expected_intent": "unsupported",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": true,
+      "ms": 6.7
+    },
+    {
+      "language": "en",
+      "question": "What is the capital of Italy?",
+      "expected_intent": "unsupported",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": true,
+      "ms": 6.7
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "chniya ettaks fi Tunis ghodwa",
+      "expected_intent": "unsupported",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": true,
+      "ms": 6.5
+    },
+    {
+      "language": "fr",
+      "question": "Combien de contrats a Ahmed ?",
+      "expected_intent": "unsupported",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": true,
+      "ms": 0.1
+    },
+    {
+      "language": "en",
+      "question": "Delete every policy.",
+      "expected_intent": "unsupported",
+      "predicted_intent": "",
+      "status": "rejected",
+      "correct": true,
+      "ms": 0.0
+    },
+    {
+      "language": "tn-Arabizi",
+      "question": "famma assurance l Ahmed",
+      "expected_intent": "unsupported",
+      "predicted_intent": "",
+      "status": "unsupported",
+      "correct": true,
+      "ms": 0.0
+    }
+  ]
+}

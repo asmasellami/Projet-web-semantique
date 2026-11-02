@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views, views_assures, views_biens, views_contrats, views_crud, views_nlp
 from .services.registre import REGISTRE
+from . import views_multilingual
 
 urlpatterns = [
+    path("assistant/", views_multilingual.assistant, name="assistant"),
     path("", views.accueil, name="accueil"),
     path("sinistres/", views.liste_sinistres, name="sinistres"),
 

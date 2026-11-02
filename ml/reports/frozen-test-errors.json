@@ -1,0 +1,236 @@
+[
+  {
+    "id": "biens_assure-fr-8-0",
+    "text": "Que possède Ahmed ?",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-fr-9-0",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Ahmed",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-fr-9-1",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Salma",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-fr-9-2",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Youssef",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-8-0",
+    "text": "Ahmed chnowa yomlek",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-8-2",
+    "text": "Youssef chnowa yomlek",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-9-2",
+    "text": "n7eb les biens couverts bel contrats mta3 Youssef",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "contrats_assure-fr-9-1",
+    "text": "Je voudrais consulter les polices de Salma",
+    "expected": "contrats_assure",
+    "predicted": "biens_assure"
+  },
+  {
+    "id": "sinistres_filtres-fr-8-0",
+    "text": "Les sinistres en expertise à Tunis",
+    "expected": "sinistres_filtres",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "sinistres_filtres-fr-8-2",
+    "text": "Les sinistres en expertise à Sousse",
+    "expected": "sinistres_filtres",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "sinistres_filtres-tn-Arabizi-8-0",
+    "text": "les sinistres en expertise fi Tunis",
+    "expected": "sinistres_filtres",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "garanties_contrat-tn-Arabizi-9-0",
+    "text": "n7eb nchouf garanties mta3 AUTO-2026-001",
+    "expected": "garanties_contrat",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "garanties_contrat-tn-Arabizi-9-1",
+    "text": "n7eb nchouf garanties mta3 HAB-2026-014",
+    "expected": "garanties_contrat",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "garanties_contrat-tn-Arabizi-9-2",
+    "text": "n7eb nchouf garanties mta3 SANTE-2026-031",
+    "expected": "garanties_contrat",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "clauses_contrat-fr-9-0",
+    "text": "Je voudrais consulter les conditions de AUTO-2026-001",
+    "expected": "clauses_contrat",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "clauses_contrat-fr-9-1",
+    "text": "Je voudrais consulter les conditions de HAB-2026-014",
+    "expected": "clauses_contrat",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "clauses_contrat-fr-9-2",
+    "text": "Je voudrais consulter les conditions de SANTE-2026-031",
+    "expected": "clauses_contrat",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "clauses_contrat-en-9-0",
+    "text": "I would like the terms of contract AUTO-2026-001",
+    "expected": "clauses_contrat",
+    "predicted": "garanties_contrat"
+  },
+  {
+    "id": "clauses_contrat-en-9-1",
+    "text": "I would like the terms of contract HAB-2026-014",
+    "expected": "clauses_contrat",
+    "predicted": "garanties_contrat"
+  },
+  {
+    "id": "clauses_contrat-en-9-2",
+    "text": "I would like the terms of contract SANTE-2026-031",
+    "expected": "clauses_contrat",
+    "predicted": "garanties_contrat"
+  },
+  {
+    "id": "dommages_sinistre-fr-9-0",
+    "text": "Je voudrais consulter les dégâts de S001",
+    "expected": "dommages_sinistre",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "dommages_sinistre-fr-9-1",
+    "text": "Je voudrais consulter les dégâts de S002",
+    "expected": "dommages_sinistre",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "dommages_sinistre-fr-9-2",
+    "text": "Je voudrais consulter les dégâts de S003",
+    "expected": "dommages_sinistre",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "dommages_sinistre-tn-Arabizi-9-0",
+    "text": "n7eb nchouf les degats mta3 S001",
+    "expected": "dommages_sinistre",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "dommages_sinistre-tn-Arabizi-9-1",
+    "text": "n7eb nchouf les degats mta3 S002",
+    "expected": "dommages_sinistre",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "dommages_sinistre-tn-Arabizi-9-2",
+    "text": "n7eb nchouf les degats mta3 S003",
+    "expected": "dommages_sinistre",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-fr-9-0",
+    "text": "Je voudrais consulter les barèmes applicables à S001",
+    "expected": "baremes_sinistre",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-fr-9-1",
+    "text": "Je voudrais consulter les barèmes applicables à S002",
+    "expected": "baremes_sinistre",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-fr-9-2",
+    "text": "Je voudrais consulter les barèmes applicables à S003",
+    "expected": "baremes_sinistre",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-tn-Arabizi-9-0",
+    "text": "n7eb nchouf baremes applicables 3la S001",
+    "expected": "baremes_sinistre",
+    "predicted": "indemnisation_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-tn-Arabizi-9-1",
+    "text": "n7eb nchouf baremes applicables 3la S002",
+    "expected": "baremes_sinistre",
+    "predicted": "indemnisation_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-tn-Arabizi-9-2",
+    "text": "n7eb nchouf baremes applicables 3la S003",
+    "expected": "baremes_sinistre",
+    "predicted": "indemnisation_sinistre"
+  },
+  {
+    "id": "negative-fr-9",
+    "text": "Réserve un restaurant",
+    "expected": "unsupported",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "negative-en-9",
+    "text": "Book a restaurant",
+    "expected": "unsupported",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "negative-tn-Arabizi-9",
+    "text": "reserverli restaurant",
+    "expected": "unsupported",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "negative-fr-28",
+    "text": "Combien de sinistres sont à Tunis ?",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-en-28",
+    "text": "How many claims are in Tunis?",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-tn-Arabizi-28",
+    "text": "9adech men sinistre fi Tunis",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-en-29",
+    "text": "Compare insurer prices",
+    "expected": "unsupported",
+    "predicted": "indemnisation_sinistre"
+  }
+]

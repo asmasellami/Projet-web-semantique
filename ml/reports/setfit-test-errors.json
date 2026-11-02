@@ -1,0 +1,188 @@
+[
+  {
+    "id": "biens_assure-fr-8-0",
+    "text": "Que possède Ahmed ?",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-fr-9-0",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Ahmed",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-fr-9-1",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Salma",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-fr-9-2",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Youssef",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-8-0",
+    "text": "Ahmed chnowa yomlek",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-8-1",
+    "text": "Salma chnowa yomlek",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-8-2",
+    "text": "Youssef chnowa yomlek",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-9-0",
+    "text": "n7eb les biens couverts bel contrats mta3 Ahmed",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-9-1",
+    "text": "n7eb les biens couverts bel contrats mta3 Salma",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "biens_assure-tn-Arabizi-9-2",
+    "text": "n7eb les biens couverts bel contrats mta3 Youssef",
+    "expected": "biens_assure",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "assures_compagnie-fr-8-0",
+    "text": "Les personnes couvertes par des contrats de AssurTunis",
+    "expected": "assures_compagnie",
+    "predicted": "contrats_assure"
+  },
+  {
+    "id": "assures_compagnie-tn-Arabizi-8-0",
+    "text": "les personnes elli 3andhom contrat m3a AssurTunis",
+    "expected": "assures_compagnie",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "assures_compagnie-tn-Arabizi-8-1",
+    "text": "les personnes elli 3andhom contrat m3a MedAssur",
+    "expected": "assures_compagnie",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "assures_compagnie-tn-Arabizi-8-2",
+    "text": "les personnes elli 3andhom contrat m3a GlobalRe",
+    "expected": "assures_compagnie",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "contrats_assure-fr-9-1",
+    "text": "Je voudrais consulter les polices de Salma",
+    "expected": "contrats_assure",
+    "predicted": "biens_assure"
+  },
+  {
+    "id": "sinistres_filtres-fr-8-0",
+    "text": "Les sinistres en expertise à Tunis",
+    "expected": "sinistres_filtres",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "sinistres_filtres-tn-Arabizi-8-0",
+    "text": "les sinistres en expertise fi Tunis",
+    "expected": "sinistres_filtres",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "sinistres_filtres-tn-Arabizi-8-2",
+    "text": "les sinistres en expertise fi Sousse",
+    "expected": "sinistres_filtres",
+    "predicted": "expertises_sinistre"
+  },
+  {
+    "id": "indemnisation_sinistre-tn-Arabizi-8-0",
+    "text": "les versements mta3 sinistre S001",
+    "expected": "indemnisation_sinistre",
+    "predicted": "dommages_sinistre"
+  },
+  {
+    "id": "indemnisation_sinistre-tn-Arabizi-8-1",
+    "text": "les versements mta3 sinistre S002",
+    "expected": "indemnisation_sinistre",
+    "predicted": "dommages_sinistre"
+  },
+  {
+    "id": "indemnisation_sinistre-tn-Arabizi-8-2",
+    "text": "les versements mta3 sinistre S003",
+    "expected": "indemnisation_sinistre",
+    "predicted": "dommages_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-tn-Arabizi-9-0",
+    "text": "n7eb nchouf baremes applicables 3la S001",
+    "expected": "baremes_sinistre",
+    "predicted": "indemnisation_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-tn-Arabizi-9-1",
+    "text": "n7eb nchouf baremes applicables 3la S002",
+    "expected": "baremes_sinistre",
+    "predicted": "indemnisation_sinistre"
+  },
+  {
+    "id": "baremes_sinistre-tn-Arabizi-9-2",
+    "text": "n7eb nchouf baremes applicables 3la S003",
+    "expected": "baremes_sinistre",
+    "predicted": "indemnisation_sinistre"
+  },
+  {
+    "id": "negative-fr-9",
+    "text": "Réserve un restaurant",
+    "expected": "unsupported",
+    "predicted": "baremes_sinistre"
+  },
+  {
+    "id": "negative-tn-Arabizi-9",
+    "text": "reserverli restaurant",
+    "expected": "unsupported",
+    "predicted": "biens_assure"
+  },
+  {
+    "id": "negative-fr-28",
+    "text": "Combien de sinistres sont à Tunis ?",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-en-28",
+    "text": "How many claims are in Tunis?",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-tn-Arabizi-28",
+    "text": "9adech men sinistre fi Tunis",
+    "expected": "unsupported",
+    "predicted": "sinistres_filtres"
+  },
+  {
+    "id": "negative-en-29",
+    "text": "Compare insurer prices",
+    "expected": "unsupported",
+    "predicted": "assures_compagnie"
+  },
+  {
+    "id": "negative-tn-Arabizi-29",
+    "text": "9aren les tarifs mta3 compagnies",
+    "expected": "unsupported",
+    "predicted": "contrats_assure"
+  }
+]

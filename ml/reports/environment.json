@@ -1,0 +1,21 @@
+{
+  "python": "3.13.2",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "hardware": "Intel Core i3-1305U, approximately 16 GB RAM, CPU training",
+  "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "model_revision": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "packages": {
+    "setfit": "1.2.0",
+    "sentence-transformers": "6.2.0",
+    "transformers": "5.22.1",
+    "torch": "2.15.0",
+    "scikit-learn": "1.9.1",
+    "Django": "5.2.18"
+  },
+  "training_budget": {
+    "seed": 42,
+    "encoder_steps": 40,
+    "pair_batch_size": 8,
+    "maximum_sequence_length": 64
+  }
+}

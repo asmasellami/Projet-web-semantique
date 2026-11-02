@@ -1,0 +1,41 @@
+{
+  "selection_score": 0.9107871926053744,
+  "weight": 1,
+  "threshold": 0.15,
+  "margin": 0,
+  "validation": {
+    "all": {
+      "n": 198,
+      "accuracy": 0.9141414141414141,
+      "macro_f1": 0.9117609663064208,
+      "supported_accuracy": 0.9277777777777778,
+      "rejection_rate": 0.7777777777777778,
+      "coverage": 0.9944444444444445
+    },
+    "fr": {
+      "n": 66,
+      "accuracy": 0.8787878787878788,
+      "macro_f1": 0.874891774891775,
+      "supported_accuracy": 0.9,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 1.0
+    },
+    "en": {
+      "n": 66,
+      "accuracy": 0.9242424242424242,
+      "macro_f1": 0.9212121212121214,
+      "supported_accuracy": 0.9333333333333333,
+      "rejection_rate": 0.8333333333333334,
+      "coverage": 0.9833333333333333
+    },
+    "tn-Arabizi": {
+      "n": 66,
+      "accuracy": 0.9393939393939394,
+      "macro_f1": 0.9362576817122271,
+      "supported_accuracy": 0.95,
+      "rejection_rate": 0.8333333333333334,
+      "coverage": 1.0
+    }
+  },
+  "development_history": "additional experiment after stage1 aggregate tests; choices use validation only"
+}
