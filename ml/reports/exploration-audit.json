@@ -3,10 +3,9 @@
   "triple_count_before": "2651",
   "triple_count_after": "2651",
   "summary": {
-    "not_answered": 38,
-    "wrong_records": 7,
+    "correct_records": 48,
     "appropriate_clarification": 9,
-    "correct_records": 6
+    "helpful_guidance": 3
   },
   "records": [
     {
@@ -14,63 +13,72 @@
       "language": "en",
       "previous_turn": "",
       "question": "give me the name of all users",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "list_customers",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Assure_Ahmed",
         "Assure_Salma",
-        "Assure_Youssef",
-        "Client_CRM_4471"
+        "Assure_Youssef"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_customers",
       "language": "fr",
       "previous_turn": "",
       "question": "Donne-moi les noms de tous les clients",
-      "status": "clarify",
-      "intent": "assures_compagnie",
-      "message": "Précisez un identifiant ou nom connu (CompagnieAssurance). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_customers",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Assure_Ahmed",
         "Assure_Salma",
-        "Assure_Youssef",
-        "Client_CRM_4471"
+        "Assure_Youssef"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_customers",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "warini les noms mta3 les clients lkol",
-      "status": "clarify",
-      "intent": "assures_compagnie",
-      "message": "Précisez un identifiant ou nom connu (CompagnieAssurance). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_customers",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Assure_Ahmed",
         "Assure_Salma",
-        "Assure_Youssef",
-        "Client_CRM_4471"
+        "Assure_Youssef"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "ambiguous_insurances",
       "language": "en",
       "previous_turn": "",
       "question": "give me the names of the insurances",
-      "status": "unsupported",
+      "status": "clarify",
       "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "message": "Par « assurances », voulez-vous les compagnies ou les contrats ?",
       "expected_ids": null,
       "actual_ids": [],
-      "outcome": "not_answered"
+      "outcome": "appropriate_clarification"
     },
     {
       "scenario": "ambiguous_insurances",
@@ -78,11 +86,11 @@
       "previous_turn": "",
       "question": "Donne-moi les noms des assurances",
       "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "intent": "",
+      "message": "Par « assurances », voulez-vous les compagnies ou les contrats ?",
       "expected_ids": null,
       "actual_ids": [],
-      "outcome": "not_answered"
+      "outcome": "appropriate_clarification"
     },
     {
       "scenario": "ambiguous_insurances",
@@ -90,71 +98,86 @@
       "previous_turn": "",
       "question": "a3tini les noms mta3 les assurances",
       "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "intent": "",
+      "message": "Par « assurances », voulez-vous les compagnies ou les contrats ?",
       "expected_ids": null,
       "actual_ids": [],
-      "outcome": "not_answered"
+      "outcome": "appropriate_clarification"
     },
     {
       "scenario": "list_insurers",
       "language": "en",
       "previous_turn": "",
       "question": "List all insurance companies",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "list_insurers",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "AssurTunis",
         "GlobalRe",
         "MedAssur",
         "TunisRe"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "AssurTunis",
+        "GlobalRe",
+        "MedAssur",
+        "TunisRe"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_insurers",
       "language": "fr",
       "previous_turn": "",
       "question": "Liste toutes les compagnies d’assurance",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "list_insurers",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "AssurTunis",
         "GlobalRe",
         "MedAssur",
         "TunisRe"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "AssurTunis",
+        "GlobalRe",
+        "MedAssur",
+        "TunisRe"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_insurers",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "warini les compagnies assurance lkol",
-      "status": "clarify",
-      "intent": "assures_compagnie",
-      "message": "Précisez un identifiant ou nom connu (CompagnieAssurance). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_insurers",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "AssurTunis",
         "GlobalRe",
         "MedAssur",
         "TunisRe"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "AssurTunis",
+        "GlobalRe",
+        "MedAssur",
+        "TunisRe"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_policies",
       "language": "en",
       "previous_turn": "",
       "question": "Show all insurance contracts",
-      "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_policies",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Contrat_Auto_2025_087",
         "Contrat_Auto_2026_001",
@@ -162,17 +185,23 @@
         "Contrat_Hab_2026_014",
         "Contrat_Sante_2026_031"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Auto_2026_112",
+        "Contrat_Hab_2026_014",
+        "Contrat_Sante_2026_031"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_policies",
       "language": "fr",
       "previous_turn": "",
       "question": "Liste tous les contrats d’assurance",
-      "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_policies",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Contrat_Auto_2025_087",
         "Contrat_Auto_2026_001",
@@ -180,17 +209,23 @@
         "Contrat_Hab_2026_014",
         "Contrat_Sante_2026_031"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Auto_2026_112",
+        "Contrat_Hab_2026_014",
+        "Contrat_Sante_2026_031"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_policies",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "warini les contrats assurance lkol",
-      "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_policies",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Contrat_Auto_2025_087",
         "Contrat_Auto_2026_001",
@@ -198,233 +233,278 @@
         "Contrat_Hab_2026_014",
         "Contrat_Sante_2026_031"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Auto_2026_112",
+        "Contrat_Hab_2026_014",
+        "Contrat_Sante_2026_031"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_assets",
       "language": "en",
       "previous_turn": "",
       "question": "Show all insured assets",
-      "status": "clarify",
-      "intent": "biens_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_assets",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Logement_Ariana",
         "PersonneAssuree_Ahmed",
         "Vehicule_123TU4567",
         "Vehicule_205TU8890"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Logement_Ariana",
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567",
+        "Vehicule_205TU8890"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_assets",
       "language": "fr",
       "previous_turn": "",
       "question": "Liste tous les biens assurés",
-      "status": "clarify",
-      "intent": "biens_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_assets",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Logement_Ariana",
         "PersonneAssuree_Ahmed",
         "Vehicule_123TU4567",
         "Vehicule_205TU8890"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Logement_Ariana",
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567",
+        "Vehicule_205TU8890"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "list_assets",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "warini les biens assures lkol",
-      "status": "clarify",
-      "intent": "biens_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "list_assets",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Logement_Ariana",
         "PersonneAssuree_Ahmed",
         "Vehicule_123TU4567",
         "Vehicule_205TU8890"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Logement_Ariana",
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567",
+        "Vehicule_205TU8890"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "owner_plate_123",
       "language": "en",
       "previous_turn": "",
       "question": "who owns this car 123 TU 4567",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
-        "Assure_Ahmed",
-        "Client_CRM_4471"
+        "Assure_Ahmed"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "owner_plate_123",
       "language": "fr",
       "previous_turn": "",
       "question": "À qui appartient la voiture 123 TU 4567 ?",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
-        "Assure_Ahmed",
-        "Client_CRM_4471"
+        "Assure_Ahmed"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "owner_plate_123",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "karhba hedhi mta chkoun 123 TU 4567",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
-        "Assure_Ahmed",
-        "Client_CRM_4471"
+        "Assure_Ahmed"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "owner_plate_205",
       "language": "en",
       "previous_turn": "",
       "question": "who owns this car 205 TU 8890",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Assure_Youssef"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Youssef"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "owner_plate_205",
       "language": "fr",
       "previous_turn": "",
       "question": "Qui possède la voiture 205 TU 8890 ?",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Assure_Youssef"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Youssef"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "owner_plate_205",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "karhba hedhi mta chkoun 205 TU 8890",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Assure_Youssef"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Youssef"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_from_vehicle",
       "language": "en",
       "previous_turn": "",
       "question": "Which policies cover car 123 TU 4567?",
-      "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "policies_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Contrat_Auto_2025_087",
         "Contrat_Auto_2026_001"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_from_vehicle",
       "language": "fr",
       "previous_turn": "",
       "question": "Quels contrats couvrent la voiture 123 TU 4567 ?",
-      "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "policies_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Contrat_Auto_2025_087",
         "Contrat_Auto_2026_001"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_from_vehicle",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "anehom les contrats elli yghattiw karhba 123 TU 4567",
-      "status": "clarify",
-      "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "policies_vehicle",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Contrat_Auto_2025_087",
         "Contrat_Auto_2026_001"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_issuer",
       "language": "en",
       "previous_turn": "",
       "question": "Which company issued AUTO-2026-001?",
-      "status": "clarify",
-      "intent": "baremes_sinistre",
-      "message": "Précisez un identifiant ou nom connu (Sinistre). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "issuer_policy",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "AssurTunis"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "AssurTunis"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_issuer",
       "language": "fr",
       "previous_turn": "",
       "question": "Quelle compagnie a émis AUTO-2026-001 ?",
-      "status": "clarify",
-      "intent": "indemnisation_sinistre",
-      "message": "Précisez un identifiant ou nom connu (Sinistre). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "issuer_policy",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "AssurTunis"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "AssurTunis"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_issuer",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "anehi compagnie elli 3amlet AUTO-2026-001",
-      "status": "clarify",
-      "intent": "dommages_sinistre",
-      "message": "Précisez un identifiant ou nom connu (Sinistre). / Specify a known name or ID.",
+      "status": "ok",
+      "intent": "issuer_policy",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "AssurTunis"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "AssurTunis"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_holder",
@@ -432,32 +512,31 @@
       "previous_turn": "",
       "question": "Who holds policy AUTO-2026-001?",
       "status": "ok",
-      "intent": "garanties_contrat",
+      "intent": "holder_policy",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
-        "Assure_Ahmed",
-        "Client_CRM_4471"
+        "Assure_Ahmed"
       ],
       "actual_ids": [
-        "Garantie_BrisGlace_Auto",
-        "Garantie_RC_Auto"
+        "Assure_Ahmed"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_holder",
       "language": "fr",
       "previous_turn": "",
       "question": "Qui a souscrit le contrat AUTO-2026-001 ?",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "holder_policy",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
-        "Assure_Ahmed",
-        "Client_CRM_4471"
+        "Assure_Ahmed"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Assure_Ahmed"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "policy_holder",
@@ -465,17 +544,15 @@
       "previous_turn": "",
       "question": "chkoun souscrit contrat AUTO-2026-001",
       "status": "ok",
-      "intent": "garanties_contrat",
+      "intent": "holder_policy",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
-        "Assure_Ahmed",
-        "Client_CRM_4471"
+        "Assure_Ahmed"
       ],
       "actual_ids": [
-        "Garantie_BrisGlace_Auto",
-        "Garantie_RC_Auto"
+        "Assure_Ahmed"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "claim_by_id",
@@ -483,15 +560,15 @@
       "previous_turn": "",
       "question": "Show claim S001",
       "status": "ok",
-      "intent": "indemnisation_sinistre",
+      "intent": "claim_details",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Sinistre_S001"
       ],
       "actual_ids": [
-        "Indemnisation_I001"
+        "Sinistre_S001"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "claim_by_id",
@@ -499,15 +576,15 @@
       "previous_turn": "",
       "question": "Montre le sinistre S001",
       "status": "ok",
-      "intent": "expertises_sinistre",
+      "intent": "claim_details",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Sinistre_S001"
       ],
       "actual_ids": [
-        "Expertise_E001"
+        "Sinistre_S001"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "claim_by_id",
@@ -515,29 +592,31 @@
       "previous_turn": "",
       "question": "warini sinistre S001",
       "status": "ok",
-      "intent": "indemnisation_sinistre",
+      "intent": "claim_details",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Sinistre_S001"
       ],
       "actual_ids": [
-        "Indemnisation_I001"
+        "Sinistre_S001"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "claims_of_customer",
       "language": "en",
       "previous_turn": "",
       "question": "Show Ahmed’s claims",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "customer_claims",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Sinistre_S001"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Sinistre_S001"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "claims_of_customer",
@@ -545,19 +624,15 @@
       "previous_turn": "",
       "question": "Liste les sinistres de Ahmed",
       "status": "ok",
-      "intent": "sinistres_filtres",
+      "intent": "customer_claims",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Sinistre_S001"
       ],
       "actual_ids": [
-        "Sinistre_S001",
-        "Sinistre_S002",
-        "Sinistre_S003",
-        "Sinistre_S004",
-        "Sinistre_S005"
+        "Sinistre_S001"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "claims_of_customer",
@@ -565,19 +640,15 @@
       "previous_turn": "",
       "question": "warini les sinistres mta3 Ahmed",
       "status": "ok",
-      "intent": "sinistres_filtres",
+      "intent": "customer_claims",
       "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Sinistre_S001"
       ],
       "actual_ids": [
-        "Sinistre_S001",
-        "Sinistre_S002",
-        "Sinistre_S003",
-        "Sinistre_S004",
-        "Sinistre_S005"
+        "Sinistre_S001"
       ],
-      "outcome": "wrong_records"
+      "outcome": "correct_records"
     },
     {
       "scenario": "missing_customer",
@@ -716,129 +787,174 @@
       "language": "en",
       "previous_turn": "Show policies held by Ahmed",
       "question": "And his assets?",
-      "status": "unsupported",
-      "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "status": "ok",
+      "intent": "biens_assure",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "PersonneAssuree_Ahmed",
         "Vehicule_123TU4567"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_assets",
       "language": "fr",
       "previous_turn": "Show policies held by Ahmed",
       "question": "Et ses biens ?",
-      "status": "clarify",
+      "status": "ok",
       "intent": "biens_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "PersonneAssuree_Ahmed",
         "Vehicule_123TU4567"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_assets",
       "language": "tn-Darija",
       "previous_turn": "Show policies held by Ahmed",
       "question": "w les biens mte3ou",
-      "status": "clarify",
+      "status": "ok",
       "intent": "biens_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "PersonneAssuree_Ahmed",
         "Vehicule_123TU4567"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_guarantees",
       "language": "en",
       "previous_turn": "Which guarantees are included in policy AUTO-2026-001?",
       "question": "And its clauses?",
-      "status": "clarify",
+      "status": "ok",
       "intent": "clauses_contrat",
-      "message": "Précisez un identifiant ou nom connu (ContratAssurance). / Specify a known name or ID.",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Exclusion_ConduiteEtatIvresse",
         "Franchise_Auto_200",
         "Resiliation_Auto_30j"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_guarantees",
       "language": "fr",
       "previous_turn": "Which guarantees are included in policy AUTO-2026-001?",
       "question": "Et ses clauses ?",
-      "status": "clarify",
+      "status": "ok",
       "intent": "clauses_contrat",
-      "message": "Précisez un identifiant ou nom connu (ContratAssurance). / Specify a known name or ID.",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Exclusion_ConduiteEtatIvresse",
         "Franchise_Auto_200",
         "Resiliation_Auto_30j"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_guarantees",
       "language": "tn-Darija",
       "previous_turn": "Which guarantees are included in policy AUTO-2026-001?",
       "question": "w les clauses mte3ou",
-      "status": "clarify",
+      "status": "ok",
       "intent": "clauses_contrat",
-      "message": "Précisez un identifiant ou nom connu (ContratAssurance). / Specify a known name or ID.",
+      "message": "Question comprise / Understood / fhemt sou2alek",
       "expected_ids": [
         "Exclusion_ConduiteEtatIvresse",
         "Franchise_Auto_200",
         "Resiliation_Auto_30j"
       ],
-      "actual_ids": [],
-      "outcome": "not_answered"
+      "actual_ids": [
+        "Exclusion_ConduiteEtatIvresse",
+        "Franchise_Auto_200",
+        "Resiliation_Auto_30j"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_choice",
       "language": "en",
       "previous_turn": "List all insurance customers",
       "question": "Show the first one’s policies",
-      "status": "clarify",
+      "status": "ok",
       "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
-      "expected_ids": null,
-      "actual_ids": [],
-      "outcome": "appropriate_clarification"
+      "message": "Question comprise / Understood / fhemt sou2alek",
+      "expected_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_choice",
       "language": "fr",
       "previous_turn": "List all insurance customers",
       "question": "Montre les contrats du premier",
-      "status": "clarify",
+      "status": "ok",
       "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
-      "expected_ids": null,
-      "actual_ids": [],
-      "outcome": "appropriate_clarification"
+      "message": "Question comprise / Understood / fhemt sou2alek",
+      "expected_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "followup_choice",
       "language": "tn-Darija",
       "previous_turn": "List all insurance customers",
       "question": "warini contrats mta3 louleni",
-      "status": "clarify",
+      "status": "ok",
       "intent": "contrats_assure",
-      "message": "Précisez un identifiant ou nom connu (Assure). / Specify a known name or ID.",
-      "expected_ids": null,
-      "actual_ids": [],
-      "outcome": "appropriate_clarification"
+      "message": "Question comprise / Understood / fhemt sou2alek",
+      "expected_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual_ids": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "outcome": "correct_records"
     },
     {
       "scenario": "all_claims",
@@ -917,36 +1033,36 @@
       "language": "en",
       "previous_turn": "",
       "question": "What can I ask you?",
-      "status": "unsupported",
+      "status": "help",
       "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "message": "Explorez les clients, compagnies, contrats ou biens, puis sélectionnez un résultat pour continuer.",
       "expected_ids": null,
       "actual_ids": [],
-      "outcome": "not_answered"
+      "outcome": "helpful_guidance"
     },
     {
       "scenario": "help",
       "language": "fr",
       "previous_turn": "",
       "question": "Quelles questions puis-je poser ?",
-      "status": "clarify",
-      "intent": "clauses_contrat",
-      "message": "Précisez un identifiant ou nom connu (ContratAssurance). / Specify a known name or ID.",
+      "status": "help",
+      "intent": "",
+      "message": "Explorez les clients, compagnies, contrats ou biens, puis sélectionnez un résultat pour continuer.",
       "expected_ids": null,
       "actual_ids": [],
-      "outcome": "not_answered"
+      "outcome": "helpful_guidance"
     },
     {
       "scenario": "help",
       "language": "tn-Darija",
       "previous_turn": "",
       "question": "chnowa najem nes2lek",
-      "status": "unsupported",
+      "status": "help",
       "intent": "",
-      "message": "Question non reconnue avec assez de confiance. Reformulez avec les exemples.",
+      "message": "Explorez les clients, compagnies, contrats ou biens, puis sélectionnez un résultat pour continuer.",
       "expected_ids": null,
       "actual_ids": [],
-      "outcome": "not_answered"
+      "outcome": "helpful_guidance"
     }
   ]
 }

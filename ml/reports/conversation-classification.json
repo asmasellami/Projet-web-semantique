@@ -1,0 +1,106 @@
+{
+  "seed": 42,
+  "added_examples": 330,
+  "total_examples": 1320,
+  "labels": [
+    "assures_compagnie",
+    "baremes_sinistre",
+    "biens_assure",
+    "claim_details",
+    "clauses_contrat",
+    "contrats_assure",
+    "customer_claims",
+    "dommages_sinistre",
+    "expertises_sinistre",
+    "garanties_contrat",
+    "holder_policy",
+    "indemnisation_sinistre",
+    "insurer_policies",
+    "issuer_policy",
+    "list_assets",
+    "list_customers",
+    "list_insurers",
+    "list_policies",
+    "owner_vehicle",
+    "policies_vehicle",
+    "policy_assets",
+    "policy_claims",
+    "sinistres_filtres",
+    "unsupported"
+  ],
+  "counts": {
+    "train": 792,
+    "validation": 264,
+    "test": 264
+  },
+  "audit_prompts_added_to_training": 0,
+  "validation": {
+    "all": {
+      "n": 264,
+      "accuracy": 0.7916666666666666,
+      "macro_f1": 0.6681403806403806,
+      "supported_accuracy": 0.7967479674796748,
+      "rejection_rate": 0.7222222222222222,
+      "coverage": 0.9146341463414634
+    },
+    "fr": {
+      "n": 88,
+      "accuracy": 0.7386363636363636,
+      "macro_f1": 0.553058488352606,
+      "supported_accuracy": 0.7439024390243902,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 0.9024390243902439
+    },
+    "en": {
+      "n": 88,
+      "accuracy": 0.8181818181818182,
+      "macro_f1": 0.6996970621970622,
+      "supported_accuracy": 0.8292682926829268,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 0.9024390243902439
+    },
+    "tn-Arabizi": {
+      "n": 88,
+      "accuracy": 0.8181818181818182,
+      "macro_f1": 0.6557730463980463,
+      "supported_accuracy": 0.8170731707317073,
+      "rejection_rate": 0.8333333333333334,
+      "coverage": 0.9390243902439024
+    }
+  },
+  "test": {
+    "all": {
+      "n": 264,
+      "accuracy": 0.8181818181818182,
+      "macro_f1": 0.768166416507985,
+      "supported_accuracy": 0.8292682926829268,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 0.9512195121951219
+    },
+    "fr": {
+      "n": 88,
+      "accuracy": 0.8636363636363636,
+      "macro_f1": 0.7888174325674324,
+      "supported_accuracy": 0.8780487804878049,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 0.9634146341463414
+    },
+    "en": {
+      "n": 88,
+      "accuracy": 0.6931818181818182,
+      "macro_f1": 0.6069606047547224,
+      "supported_accuracy": 0.6951219512195121,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 0.926829268292683
+    },
+    "tn-Arabizi": {
+      "n": 88,
+      "accuracy": 0.8977272727272727,
+      "macro_f1": 0.8113067488067488,
+      "supported_accuracy": 0.9146341463414634,
+      "rejection_rate": 0.6666666666666666,
+      "coverage": 0.9634146341463414
+    }
+  },
+  "limitations": "AI-authored internal corpus; no native review; relation contracts and conversation state are evaluated separately from model-only scores."
+}

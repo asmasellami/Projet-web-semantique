@@ -1,5 +1,7 @@
 # Corpus provenance and annotation
 
+The original corpus below is retained for the first release. `conversation-questions.jsonl` adds 330 discovery/reverse-relationship examples (1,320 records total) for the conversation release. Regenerate/train with `ml/train_conversation.py`; see `ml/CONVERSATION_RESULTS.md`. Typed identifier placeholders distinguish policies, claims and registrations in the newer classifier. All new examples remain AI-authored, not native-reviewed.
+
 `questions.jsonl` is an AI-authored insurance-query seed corpus generated reproducibly by `../build_dataset.py`. It contains 900 supported examples (10 intents x 10 phrasing patterns x 3 language styles x 3 entity substitutions), plus 90 unsupported examples. The 900 records are not 900 independent question constructions. There are 100 supported source-pattern groups, with translated phrases and all substituted names kept together, plus 30 negative-topic groups.
 
 Group split: supported patterns 0–5 train, 6–7 validation, 8–9 test; negative topics use the same rule modulo ten. This is a small development benchmark. Labels and groups are explicit, source code preserves the original templates, and no native speaker has reviewed the Arabizi. Do not present these results as validated real-world Tunisian language accuracy.

@@ -8,7 +8,11 @@ def normalize(text):
 def classifier_text(text):
     """Names/numeric identifiers are slots, not intent features. No numeral transliteration."""
     text = normalize(text)
-    text = re.sub(r'\b(?:auto|hab|sante)-\d{4}-\d+\b|\bsin-\d{4}-\d+\b|\bs\d{3}\b', ' reference ', text)
+    # Keep the entity TYPE while masking the specific ID. A policy and a claim
+    # must not become indistinguishable when learning reverse relationships.
+    text = re.sub(r'\b(?:auto|hab|sante)-\d{4}-\d+\b|\bcontrat_[a-z0-9_]+\b',' policy_reference ',text)
+    text = re.sub(r'\bsin-\d{4}-\d+\b|\bs\d{3}\b|\bsinistre_[a-z0-9_]+\b',' claim_reference ',text)
+    text = re.sub(r'\b\d{1,4}\s*tu\s*\d{1,4}\b|\bvehicule_[a-z0-9_]+\b',' vehicle_reference ',text)
     return text
 
 def word_present(text, phrase):

@@ -5,7 +5,8 @@ from dataclasses import dataclass, field
 from datetime import date
 from app import sparql_service
 from .classifier import predict
-from .contracts import CONTRACTS
+from .contracts import CONTRACTS, RESULT_TYPES
+from .routing import route
 from .queries import build
 from .text import normalize, word_present
 
@@ -26,9 +27,11 @@ class Answer:
     milliseconds: float = 0
 
 def catalogue(kind):
+    if kind not in {'Assure','CompagnieAssurance','ContratAssurance','BienAssure','Sinistre'}:
+        raise ValueError('Type inconnu')
     rows = sparql_service.query(f'''SELECT ?s ?name ?cin ?ref WHERE {{
       ?s a :{kind} . OPTIONAL {{ ?s :nom ?name }} OPTIONAL {{ ?s :cin ?cin }}
-      OPTIONAL {{ ?s ?p ?ref . VALUES ?p {{ :numeroContrat :numeroDossier }} }} }}''')
+      OPTIONAL {{ ?s ?p ?ref . VALUES ?p {{ :numeroContrat :numeroDossier :immatriculation :adresse }} }} }}''')
     groups = {}
     for row in rows:
         identifier = row['s']['value'].split('#')[-1]
@@ -46,6 +49,15 @@ def catalogue(kind):
         if kind=='Assure' and name:
             g['aliases'].add(name.split()[0])
     return list(groups.values())
+
+def alias_matches(text,alias):
+    if re.fullmatch(r'\d{1,4}\s*tu\s*\d{1,4}',normalize(alias)):
+        compact=re.sub(r'\s+','',normalize(alias))
+        return any(re.sub(r'\s+','',m.group())==compact for m in re.finditer(r'\b\d{1,4}\s*tu\s*\d{1,4}\b',text))
+    return word_present(text,alias)
+
+def matching_groups(text,groups):
+    return [g for g in groups if any(a and alias_matches(text,a) for a in g['aliases'])]
 
 STATUS = {'Déclaré':['declared','declare','declares','tsarra7','declaree'], 'En expertise':['en expertise','under assessment','under review','expertise en cours'], 'Indemnisé':['indemnise','indemnises','compensated','paid','tkhalles'], 'Refusé':['refuse','rejected','refused','marfoudh'], 'Clôturé':['cloture','closed','msakker']}
 TYPES = {'Accident':['accident','accidents'], 'Incendie':['incendie','incendies','fire','fires','7ri9'], 'Vol':['vol','theft','stolen','ser9a'], 'DegatDesEaux':['degats des eaux','water damage'], 'CatastropheNaturelle':['catastrophe naturelle','natural disaster']}
@@ -132,6 +144,8 @@ def extract_filters(text, label):
         raise ValueError('Utilisez une date explicite AAAA-MM-JJ ou un mois avec année.')
     if label!='sinistres_filtres' and (re.search(r'\b\d{4}-\d{2}-\d{2}\b',text) or re.search(r'\b(active|actif|expired|expire|suspended|suspendu)\b',text)):
         raise ValueError('Les filtres date/statut sont disponibles pour les sinistres uniquement dans cette version.')
+    if label!='sinistres_filtres' and re.search(r'\b(before|after|since|avant|apres|depuis|9bal|ba3d)\b',text):
+        raise ValueError('Cette comparaison de dates nécessite une recherche de sinistres.')
     return f
 
 def answer(question, selected=''):
@@ -140,24 +154,36 @@ def answer(question, selected=''):
         if not isinstance(question,str) or not question.strip() or len(question)>300:
             raise ValueError('Saisissez une question de 1 à 300 caractères.')
         text=normalize(question)
+        if text in {'help','aide','bonjour','hello','hi','salem','what can i ask you?','what can i ask you','quelles questions puis-je poser ?','quelles questions puis-je poser?','chnowa najem nes2lek'}:
+            r.status='help';r.message='Explorez les clients, compagnies, contrats ou biens, puis sélectionnez un résultat pour continuer.';return r
         if any(x in text for x in ['{','}',';','\\','<','>','`']) or re.search(r'\b(insert|delete|drop|clear|load|service)\b',text):
             r.status='rejected'; r.message='Question refusée : lecture seule, sans code SPARQL.'; return r
         if re.search(r'\b(how many|combien de|nombre de|supprime|delete|remove|create|ajoute|compare|fassa5|baddel|update|cancel|annule|annulili)\b',text) or re.match(r'^(does|is there|est ce que|famma)\b',text):
             r.status='unsupported'; r.message='Cette opération n’est pas prise en charge. Demandez une liste.'; return r
         if re.search(r'\b(not|without|sans|sauf|except|excluding|pas)\b',text):
             r.status='unsupported'; r.message='Les exclusions/négations dans les questions ne sont pas encore prises en charge.'; return r
+        if re.search(r'\b(insurances|assurances|insurance|assurance)\b',text) and not re.search(r'\b(company|companies|compagnies|compagnie|insurer|insurers|policy|policies|contract|contracts|contrat|contrats|client|clients|customers|assets|biens|car|auto)\b',text):
+            r.message='Par « assurances », voulez-vous les compagnies ou les contrats ?';return r
         r.prediction=predict(text)
         label=r.prediction['label']
+        catalogues={}
+        def has_entity(kind):
+            if kind not in catalogues:catalogues[kind]=catalogue(kind)
+            return bool(matching_groups(text,catalogues[kind]))
+        forced=route(text,has_entity)
+        if forced:
+            label=forced
+            r.prediction={**r.prediction,'label':label,'accepted':True,'routing':'explicit relationship contract'}
         if not r.prediction['accepted'] or label not in CONTRACTS:
             r.status='unsupported'; r.message='Question non reconnue avec assez de confiance. Reformulez avec les exemples.'; return r
         if label!='indemnisation_sinistre' and re.search(r'\b(9adech|9addesh)\b',text):
             r.status='unsupported'; r.message='Le comptage n’est pas encore disponible.'; return r
         c=CONTRACTS[label]; r.intent=label; r.title=c.title; r.path=c.path
-        r.filters=extract_filters(text,label)
+        r.filters=extract_filters(text,'sinistres_filtres' if label in ['claim_details','customer_claims','policy_claims'] else label)
         if c.entity_type:
-            groups=catalogue(c.entity_type)
+            groups=catalogues.get(c.entity_type) or catalogue(c.entity_type)
             # Longest matching alias wins; all equal-specificity matches remain ambiguous.
-            scored=[(max([len(normalize(a)) for a in g['aliases'] if a and word_present(text,a)] or [0]),g) for g in groups]
+            scored=[(max([len(normalize(a)) for a in g['aliases'] if a and alias_matches(text,a)] or [0]),g) for g in groups]
             best=max([score for score,g in scored] or [0])
             matches=[g for score,g in scored if score==best and score>0]
             if selected:
@@ -184,6 +210,17 @@ def answer(question, selected=''):
         columns=['item','name','detail','amount','location','status','date']
         for b in bindings:
             r.rows.append({k:(b.get(k,{}).get('value','').split('#')[-1] if k=='item' else b.get(k,{}).get('value','')) for k in columns})
+        kind=RESULT_TYPES.get(label,'')
+        if kind=='Assure':
+            people=catalogue('Assure'); dedup={}
+            for row in r.rows:
+                group=next((g for g in people if row['item'] in g['ids']),None)
+                ids=sorted(group['ids']) if group else [row['item']]
+                row.update(ids=ids,name=group['name'] if group else row['name'])
+                dedup.setdefault(tuple(ids),row)
+            r.rows=list(dedup.values())
+        for row in r.rows:
+            row.setdefault('ids',[row['item']]);row['kind']=kind
         r.status='ok' if r.rows else 'empty'
         r.message='Question comprise / Understood / fhemt sou2alek' if r.rows else 'Aucun résultat / No matching records / ma famech resultat'
     except ValueError as err:

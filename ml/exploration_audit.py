@@ -15,6 +15,8 @@ django.setup()
 from django.test import Client, override_settings
 from django.test.utils import setup_test_environment
 from app import sparql_service
+from app.multilingual.conversation import SESSION_KEY
+from app.multilingual.engine import catalogue
 
 # Each tuple: scenario, preceding turn, three language variants, expected graph query.
 SCENARIOS=[
@@ -35,7 +37,7 @@ SCENARIOS=[
  ('explicit_customer','',['Show policies held by Ahmed','Quels sont les contrats de Ahmed ?','warini les contrats mta3 Ahmed'],'SELECT DISTINCT ?item WHERE { ?item :estSouscritPar :Assure_Ahmed }'),
  ('followup_assets','Show policies held by Ahmed',['And his assets?','Et ses biens ?','w les biens mte3ou'],'SELECT DISTINCT ?item WHERE { { :Assure_Ahmed :estProprietaireDe ?item } UNION { ?c :estSouscritPar :Assure_Ahmed ; :couvreBien ?item } }'),
  ('followup_guarantees','Which guarantees are included in policy AUTO-2026-001?',['And its clauses?','Et ses clauses ?','w les clauses mte3ou'],'SELECT DISTINCT ?item WHERE { :Contrat_Auto_2026_001 :contientClause ?item }'),
- ('followup_choice','List all insurance customers',['Show the first one’s policies','Montre les contrats du premier','warini contrats mta3 louleni'],'clarify'),
+ ('followup_choice','List all insurance customers',['Show the first one’s policies','Montre les contrats du premier','warini contrats mta3 louleni'],'SELECT DISTINCT ?item WHERE { ?item :estSouscritPar :Assure_Ahmed }'),
  ('all_claims','',['List all claims','Liste tous les sinistres','warini les sinistres lkol'],'SELECT ?item WHERE { ?item a :Sinistre }'),
  ('help','',['What can I ask you?','Quelles questions puis-je poser ?','chnowa najem nes2lek'],'help'),
 ]
@@ -45,23 +47,29 @@ def main():
     before=sparql_service.query('SELECT (COUNT(*) AS ?n) WHERE { ?s ?p ?o }')[0]['n']['value']
     setup_test_environment()
     records=[]
+    people={alias:sorted(g['ids'])[0] for g in catalogue('Assure') for alias in g['ids']}
+    def normalized_ids(ids):return sorted({people.get(i,i) for i in ids})
+    def ask(client,question):
+        version=client.session.get(SESSION_KEY,{}).get('version',0)
+        response=client.post('/assistant/',{'q':question,'version':version})
+        assert response.status_code==302
+        return client.session[SESSION_KEY]['history'][-1]['reply']
     with override_settings(ALLOWED_HOSTS=['testserver']):
         for scenario,prior,questions,expected in SCENARIOS:
             expected_ids=None
             if expected and expected.startswith('SELECT'):
-                expected_ids=sorted({r['item']['value'].split('#')[-1] for r in sparql_service.query(expected)})
+                expected_ids=normalized_ids(r['item']['value'].split('#')[-1] for r in sparql_service.query(expected))
             for lang,q in zip(['en','fr','tn-Darija'],questions):
                 client=Client()
                 if prior:
-                    client.get('/assistant/',{'q':prior})
-                response=client.get('/assistant/',{'q':q})
-                rep=response.context['rep']
-                actual=sorted({r['item'] for r in rep.rows})
+                    ask(client,prior)
+                rep=ask(client,q)
+                actual=normalized_ids(r['item'] for r in rep['rows'])
                 if expected_ids is not None:
-                    outcome='correct_records' if rep.status in ['ok','empty'] and actual==expected_ids else 'wrong_records' if rep.status in ['ok','empty'] else 'not_answered'
+                    outcome='correct_records' if rep['status'] in ['ok','empty'] and actual==expected_ids else 'wrong_records' if rep['status'] in ['ok','empty'] else 'not_answered'
                 else:
-                    outcome='appropriate_clarification' if rep.status=='clarify' and expected=='clarify' else 'not_answered'
-                records.append(dict(scenario=scenario,language=lang,previous_turn=prior,question=q,status=rep.status,intent=rep.intent,message=rep.message,expected_ids=expected_ids,actual_ids=actual,outcome=outcome))
+                    outcome='appropriate_clarification' if rep['status']=='clarify' and (expected=='clarify' or (expected is None and 'compagnies' in rep['message'])) else 'helpful_guidance' if expected=='help' and rep['status']=='help' else 'not_answered'
+                records.append(dict(scenario=scenario,language=lang,previous_turn=prior,question=q,status=rep['status'],intent=rep['intent'],message=rep['message'],expected_ids=expected_ids,actual_ids=actual,outcome=outcome))
     after=sparql_service.query('SELECT (COUNT(*) AS ?n) WHERE { ?s ?p ?o }')[0]['n']['value']
     assert before==after
     from collections import Counter

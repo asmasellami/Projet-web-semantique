@@ -1,15 +1,24 @@
 {% extends "app/base.html" %}
-{% block titre %}Assistant multilingue{% endblock %}
+{% block titre %}Assistant assurance{% endblock %}
 {% block contenu %}
-<h1>Assistant assurance · FR / EN / Tunisian Darija</h1>
-<form method="get" class="question-form"><input type="text" name="q" value="{{ q }}" maxlength="300" required autofocus aria-label="Question" placeholder="warini les contrats mta3 Ahmed"><button class="btn">Interroger</button></form>
-<div class="exemples">{% for c in contracts %}<a class="puce" href="?q={{ c.example|urlencode }}">{{ c.example }}</a>{% endfor %}</div>
-{% if rep %}
-<div class="message {% if rep.status == 'ok' %}message-success{% else %}message-warning{% endif %}">{{ rep.message }}</div>
-{% if rep.candidates %}<div class="exemples">{% for c in rep.candidates %}<a class="puce" href="?q={{ q|urlencode }}&amp;entity={{ c.ids|urlencode }}">{{ c.name }} · {{ c.ids }}</a>{% endfor %}</div>{% endif %}
-{% if rep.intent %}<div class="panneau"><h2>Interprétation</h2><p><strong>{{ rep.title }}</strong> · {{ rep.intent }}</p><p>Entités : {{ rep.entities|join:", "|default:"—" }}</p><p>Filtres : {{ rep.filters }}</p><p>Chemin du graphe : <strong>{{ rep.path }}</strong></p><p>{{ rep.prediction.engine }} · score {{ rep.prediction.score|floatformat:3 }} (score du modèle, pas une certitude) · {{ rep.milliseconds }} ms</p></div>{% endif %}
-{% if rep.query %}<details class="panneau"><summary>Requête SPARQL exécutée</summary><pre class="sparql">{{ rep.query }}</pre></details>
-<div class="carte-tableau"><table><tr><th>Identifiant</th><th>Nom</th><th>Détail</th><th>Montant TND</th><th>Lieu</th><th>Statut</th><th>Date</th></tr>{% for row in rep.rows %}<tr>{% for v in row.values %}<td>{{ v|default:"—" }}</td>{% endfor %}</tr>{% empty %}<tr><td colspan="7">Aucun résultat.</td></tr>{% endfor %}</table></div>{% endif %}
-{% endif %}
-<p><a href="{% url 'question' %}">Comparer avec l’ancien moteur français à règles</a></p>
+<div class="chat-heading"><h1>Assistant assurance · FR / EN / Tunisian Darija</h1>
+<form method="post">{% csrf_token %}<input type="hidden" name="action" value="reset"><input type="hidden" name="version" value="{{ chat.version }}"><button class="btn btn-secondaire">Nouvelle conversation</button></form></div>
+<div class="chat-focus" aria-live="polite">{% if chat.focus %}<strong>Sélection :</strong> {{ chat.focus.name }} <small>· {{ chat.focus.kind_name }}</small>{% else %}Aucune sélection{% endif %}</div>
+<div class="chat-history" aria-label="Conversation">
+{% for turn in chat.history %}
+  <article class="chat-turn" {% if forloop.last %}id="latest"{% endif %}>
+    <p class="chat-user"><strong>Vous</strong><br>{{ turn.question }}</p>
+    {% include "app/chat_answer.html" with response=turn.reply interactive=forloop.last %}
+  </article>
+{% empty %}<p class="chat-welcome">Par où souhaitez-vous commencer ?</p>{% endfor %}
+</div>
+{% if rep %}<article class="chat-turn"><p class="chat-user"><strong>Aperçu</strong><br>{{ q }}</p>{% include "app/chat_answer.html" with response=rep interactive=False %}</article>{% endif %}
+<div class="chat-suggestions" aria-label="Questions suggérées">
+{% for suggestion in suggestions %}<form method="post">{% csrf_token %}<input type="hidden" name="version" value="{{ chat.version }}">{% if suggestion.action == 'select' %}<input type="hidden" name="action" value="select"><input type="hidden" name="item" value="{{ suggestion.item }}">{% else %}<input type="hidden" name="q" value="{{ suggestion.question }}">{% endif %}<button class="puce" type="submit">{{ suggestion.label }}</button></form>{% endfor %}
+</div>
+<form method="post" class="question-form">{% csrf_token %}<input type="hidden" name="version" value="{{ chat.version }}"><input type="text" name="q" maxlength="300" required autofocus aria-label="Votre question" placeholder="Posez votre question…"><button class="btn">Envoyer</button></form>
+<p><a href="{% url 'question' %}">Ancien moteur français à règles</a></p>
+<style>
+.chat-heading{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}.chat-heading h1{flex:1}.chat-focus{padding:12px 16px;border:1px solid #58678a;border-radius:12px;margin:12px 0 24px}.chat-turn{margin:20px 0}.chat-user{padding:16px;border-radius:14px;background:rgba(105,120,170,.15);margin-left:12%;overflow-wrap:anywhere}.chat-user strong{font-size:.8em;opacity:.7}.chat-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 12px}.chat-suggestions form{display:inline}.chat-suggestions button{cursor:pointer;font:inherit}.chat-answer{padding:16px;border:1px solid #44506b;border-radius:14px}.chat-answer .carte-tableau{max-width:100%;overflow-x:auto}.chat-answer td{overflow-wrap:anywhere}.chat-answer details{margin-top:14px}.chat-answer pre{white-space:pre-wrap;overflow-wrap:anywhere}.chat-actions{display:flex;gap:6px;flex-wrap:wrap}.chat-welcome{padding:24px 0;opacity:.8}@media(max-width:700px){.chat-user{margin-left:0}.chat-heading .btn{padding:8px}.chat-answer{padding:10px}}
+</style>
 {% endblock %}

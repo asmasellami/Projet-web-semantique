@@ -1,0 +1,7 @@
+{
+  "name": "TF-IDF + logistic regression",
+  "engine": "tfidf",
+  "path": "artifacts/tfidf.joblib",
+  "threshold": 0.15,
+  "margin": 0
+}

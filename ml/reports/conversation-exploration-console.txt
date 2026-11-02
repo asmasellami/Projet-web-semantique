@@ -1,0 +1,25 @@
+{
+  "correct_records": 48,
+  "appropriate_clarification": 9,
+  "helpful_guidance": 3
+}
+list_customers [('en', 'ok', 'list_customers', 'correct_records'), ('fr', 'ok', 'list_customers', 'correct_records'), ('tn-Darija', 'ok', 'list_customers', 'correct_records')]
+ambiguous_insurances [('en', 'clarify', '', 'appropriate_clarification'), ('fr', 'clarify', '', 'appropriate_clarification'), ('tn-Darija', 'clarify', '', 'appropriate_clarification')]
+list_insurers [('en', 'ok', 'list_insurers', 'correct_records'), ('fr', 'ok', 'list_insurers', 'correct_records'), ('tn-Darija', 'ok', 'list_insurers', 'correct_records')]
+list_policies [('en', 'ok', 'list_policies', 'correct_records'), ('fr', 'ok', 'list_policies', 'correct_records'), ('tn-Darija', 'ok', 'list_policies', 'correct_records')]
+list_assets [('en', 'ok', 'list_assets', 'correct_records'), ('fr', 'ok', 'list_assets', 'correct_records'), ('tn-Darija', 'ok', 'list_assets', 'correct_records')]
+owner_plate_123 [('en', 'ok', 'owner_vehicle', 'correct_records'), ('fr', 'ok', 'owner_vehicle', 'correct_records'), ('tn-Darija', 'ok', 'owner_vehicle', 'correct_records')]
+owner_plate_205 [('en', 'ok', 'owner_vehicle', 'correct_records'), ('fr', 'ok', 'owner_vehicle', 'correct_records'), ('tn-Darija', 'ok', 'owner_vehicle', 'correct_records')]
+policy_from_vehicle [('en', 'ok', 'policies_vehicle', 'correct_records'), ('fr', 'ok', 'policies_vehicle', 'correct_records'), ('tn-Darija', 'ok', 'policies_vehicle', 'correct_records')]
+policy_issuer [('en', 'ok', 'issuer_policy', 'correct_records'), ('fr', 'ok', 'issuer_policy', 'correct_records'), ('tn-Darija', 'ok', 'issuer_policy', 'correct_records')]
+policy_holder [('en', 'ok', 'holder_policy', 'correct_records'), ('fr', 'ok', 'holder_policy', 'correct_records'), ('tn-Darija', 'ok', 'holder_policy', 'correct_records')]
+claim_by_id [('en', 'ok', 'claim_details', 'correct_records'), ('fr', 'ok', 'claim_details', 'correct_records'), ('tn-Darija', 'ok', 'claim_details', 'correct_records')]
+claims_of_customer [('en', 'ok', 'customer_claims', 'correct_records'), ('fr', 'ok', 'customer_claims', 'correct_records'), ('tn-Darija', 'ok', 'customer_claims', 'correct_records')]
+missing_customer [('en', 'clarify', 'contrats_assure', 'appropriate_clarification'), ('fr', 'clarify', 'contrats_assure', 'appropriate_clarification'), ('tn-Darija', 'clarify', 'contrats_assure', 'appropriate_clarification')]
+misspelled_name [('en', 'clarify', 'contrats_assure', 'appropriate_clarification'), ('fr', 'clarify', 'contrats_assure', 'appropriate_clarification'), ('tn-Darija', 'clarify', 'contrats_assure', 'appropriate_clarification')]
+explicit_customer [('en', 'ok', 'contrats_assure', 'correct_records'), ('fr', 'ok', 'contrats_assure', 'correct_records'), ('tn-Darija', 'ok', 'contrats_assure', 'correct_records')]
+followup_assets [('en', 'ok', 'biens_assure', 'correct_records'), ('fr', 'ok', 'biens_assure', 'correct_records'), ('tn-Darija', 'ok', 'biens_assure', 'correct_records')]
+followup_guarantees [('en', 'ok', 'clauses_contrat', 'correct_records'), ('fr', 'ok', 'clauses_contrat', 'correct_records'), ('tn-Darija', 'ok', 'clauses_contrat', 'correct_records')]
+followup_choice [('en', 'ok', 'contrats_assure', 'correct_records'), ('fr', 'ok', 'contrats_assure', 'correct_records'), ('tn-Darija', 'ok', 'contrats_assure', 'correct_records')]
+all_claims [('en', 'ok', 'sinistres_filtres', 'correct_records'), ('fr', 'ok', 'sinistres_filtres', 'correct_records'), ('tn-Darija', 'ok', 'sinistres_filtres', 'correct_records')]
+help [('en', 'help', '', 'helpful_guidance'), ('fr', 'help', '', 'helpful_guidance'), ('tn-Darija', 'help', '', 'helpful_guidance')]

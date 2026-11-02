@@ -1,5 +1,7 @@
 # Discovery and conversation UX audit
 
+Historical audit before implementation. The resulting features and verification are now documented in [CONVERSATION_RESULTS.md](CONVERSATION_RESULTS.md). Original machine-readable evidence is retained in `reports/exploration-audit-before-conversation.json`.
+
 2 November 2026. This audit responds to the user’s four screenshot examples. These prompts are retained as evaluation evidence and were not added to training.
 
 ## UI changes completed

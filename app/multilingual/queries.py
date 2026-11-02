@@ -10,7 +10,25 @@ def values(ids):
 
 def build(label, ids, filters):
     v = values(ids) if ids else ''
-    if label == 'biens_assure':
+    if label in ('list_customers','list_insurers','list_policies','list_assets'):
+        cls={'list_customers':'Assure','list_insurers':'CompagnieAssurance','list_policies':'ContratAssurance','list_assets':'BienAssure'}[label]
+        body=f'?item a :{cls} . OPTIONAL {{ ?item :numeroContrat ?ref }} OPTIONAL {{ ?item :immatriculation ?plate }} OPTIONAL {{ ?item :cin ?cin }} BIND(COALESCE(?ref,?plate,?cin,"") AS ?detail)'
+    elif label == 'owner_vehicle':
+        body='{ ?entity :appartientA ?item } UNION { ?item :estProprietaireDe ?entity }'
+    elif label == 'policies_vehicle':
+        body='?item :couvreBien ?entity . OPTIONAL { ?item :numeroContrat ?detail }'
+    elif label == 'issuer_policy':
+        body='{ ?entity :estEmisPar ?item } UNION { ?item :emet ?entity }'
+    elif label == 'holder_policy':
+        body='{ ?entity :estSouscritPar ?item } UNION { ?item :souscrit ?entity }'
+    elif label == 'policy_assets':
+        body='?entity :couvreBien ?item . OPTIONAL { ?item :immatriculation ?detail }'
+    elif label == 'insurer_policies':
+        body='{ ?entity :emet ?item } UNION { ?item :estEmisPar ?entity }'
+    elif label in ('claim_details','customer_claims','policy_claims'):
+        body='?entity a :Sinistre . BIND(?entity AS ?item)' if label=='claim_details' else '{ ?entity :estConcerneParSinistre ?item } UNION { ?item :concerneContrat ?entity }' if label=='policy_claims' else '{ ?p :estSouscritPar ?entity ; :estConcerneParSinistre ?item } UNION { ?item :concerneContrat ?p . ?p :estSouscritPar ?entity }'
+        body='{ '+body+' } ?item a :Sinistre . OPTIONAL { ?item :numeroDossier ?detail } OPTIONAL { ?item :lieuSinistre ?location } OPTIONAL { ?item :statutDossier ?status } OPTIONAL { ?item :dateSinistre ?date }'
+    elif label == 'biens_assure':
         owned = '{ ?entity :estProprietaireDe ?item } UNION { ?item :appartientA ?entity }'
         covered = '{ ?policy :estSouscritPar ?entity ; :couvreBien ?item } UNION { ?entity :souscrit ?policy . ?policy :couvreBien ?item }'
         mode = filters.get('relationship', 'associated')
@@ -52,6 +70,18 @@ def build(label, ids, filters):
                 body += f' FILTER(?date {op} "{dt}T'+('23:59:59' if key=='date_to' else '00:00:00')+'"^^xsd:dateTime)'
     else:
         raise ValueError('Unsupported intention')
+    if label in ('customer_claims','claim_details','policy_claims'):
+        if filters.get('location'):
+            body+=' FILTER(CONTAINS(LCASE(STR(?location)),LCASE('+chaine(filters['location'])+')))'
+        if filters.get('status'):
+            body+=' FILTER(?status = '+chaine(filters['status'])+')'
+        if filters.get('type'):
+            if filters['type'] not in ('Accident','Incendie','DegatDesEaux','Vol','CatastropheNaturelle'):raise ValueError('Invalid type')
+            body+=' ?item a :'+filters['type']+' .'
+        for key,operator in [('date_from','>='),('date_to','<=')]:
+            if filters.get(key):
+                dt=date.fromisoformat(filters[key]).isoformat()
+                body+=f' FILTER(?date {operator} "{dt}T'+('23:59:59' if key=='date_to' else '00:00:00')+'"^^xsd:dateTime)'
     if filters.get('subtype'):
         allowed = {'Vehicule','Logement','ClauseExclusion','ClauseFranchise','GarantieIncendie','GarantieVol','GarantieResponsabiliteCivile','GarantieBrisDeGlace','GarantieHospitalisation','GarantieDegatsDesEaux'}
         if filters['subtype'] not in allowed:

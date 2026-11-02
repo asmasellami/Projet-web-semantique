@@ -13,6 +13,12 @@ Application Django, ontologie OWL et serveur Apache Jena Fuseki. Les données m�
 
 Application : http://127.0.0.1:8000/ ; assistant multilingue : http://127.0.0.1:8000/assistant/ ; ancien moteur français : http://127.0.0.1:8000/question/ ; base Fuseki : http://127.0.0.1:3030/.
 
+## Conversation et exploration
+
+La version actuelle conserve un historique et une sélection visible par session Django. Commencer par les suggestions d'exploration, sélectionner un résultat, puis poser des questions de suivi. Les suggestions évoluent avec les résultats et la sélection. « Nouvelle conversation » réinitialise l'historique et le contexte. Les onglets d'une même session partagent la conversation ; les actions périmées sont refusées.
+
+La version de conversation comprend 23 contrats de requêtes, un classifieur enrichi et des règles explicites de relations/contexte. Pour reproduire le modèle actuel : `python ml/train_conversation.py`, puis redémarrer Django. Le modèle sélectionné est `ml/artifacts/conversation-tfidf.joblib`. Voir `ml/CONVERSATION_RESULTS.md` pour les fonctionnalités, les deux critiques du plan, les résultats et les limites.
+
 ## Modèle local
 
 Les poids/modèles générés sont ignorés par Git. Il faut soit les entraîner avec les commandes suivantes, soit copier le dossier `ml/artifacts/` depuis la machine de réalisation. Aucun envoi vers une API LLM n'est effectué lors des questions.
@@ -38,7 +44,7 @@ L'entraînement compare TF-IDF + régression logistique, MiniLM gelé + régress
 
 ## Capacités et limites
 
-Dix familles : biens d'un assuré, assurés d'une compagnie, contrats d'un assuré, sinistres filtrés, garanties et clauses d'un contrat, dommages, expertises, indemnisation et barèmes d'un sinistre.
+Les dix familles initiales sont complétées par découverte, recherches inverses véhicule/contrat, fiche sinistre et navigation client/compagnie/contrat. Le détail des 23 contrats est dans `app/multilingual/contracts.py`.
 
 Français, anglais et Arabizi tunisien expérimental. Corpus de départ rédigé avec assistance IA ; revue par locuteurs tunisiens toujours nécessaire. Les scores internes ne prouvent pas une compréhension générale du dialecte. Le corpus et ses groupes sont documentés dans `ml/data/README.md`.
 

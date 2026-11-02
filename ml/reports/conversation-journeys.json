@@ -1,0 +1,405 @@
+{
+  "provenance": "AI-authored fresh journey wording, not native-reviewed; behavioral checks, not population accuracy.",
+  "checks": 27,
+  "correct": 27,
+  "triples_before": "2651",
+  "triples_after": "2651",
+  "records": [
+    {
+      "language": "en",
+      "step": "discover",
+      "question": "I would like to browse customers",
+      "status": "ok",
+      "intent": "list_customers",
+      "expected": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "policies",
+      "question": "Show his policies",
+      "status": "ok",
+      "intent": "contrats_assure",
+      "expected": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "assets",
+      "question": "And his properties?",
+      "status": "ok",
+      "intent": "biens_assure",
+      "expected": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "actual": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "reverse-owner",
+      "question": "Whose vehicle is 205TU8890?",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "expected": [
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "vehicle-policies",
+      "question": "Which policies cover that vehicle?",
+      "status": "ok",
+      "intent": "policies_vehicle",
+      "expected": [
+        "Contrat_Auto_2026_112"
+      ],
+      "actual": [
+        "Contrat_Auto_2026_112"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "issuer",
+      "question": "Who issued it?",
+      "status": "ok",
+      "intent": "issuer_policy",
+      "expected": [
+        "MedAssur"
+      ],
+      "actual": [
+        "MedAssur"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "holder",
+      "question": "And its holder?",
+      "status": "ok",
+      "intent": "holder_policy",
+      "expected": [
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "policy-claims",
+      "question": "And its claims?",
+      "status": "ok",
+      "intent": "policy_claims",
+      "expected": [
+        "Sinistre_S004"
+      ],
+      "actual": [
+        "Sinistre_S004"
+      ],
+      "correct": true
+    },
+    {
+      "language": "en",
+      "step": "empty-payment",
+      "question": "How much was paid for this claim?",
+      "status": "empty",
+      "intent": "indemnisation_sinistre",
+      "expected": [],
+      "actual": [],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "discover",
+      "question": "Je voudrais voir les clients",
+      "status": "ok",
+      "intent": "list_customers",
+      "expected": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "policies",
+      "question": "Montre ses contrats",
+      "status": "ok",
+      "intent": "contrats_assure",
+      "expected": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "assets",
+      "question": "Et ses propriétés ?",
+      "status": "ok",
+      "intent": "biens_assure",
+      "expected": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "actual": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "reverse-owner",
+      "question": "Le propriétaire de la voiture 205 TU 8890 ?",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "expected": [
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "vehicle-policies",
+      "question": "Quels contrats couvrent cette voiture ?",
+      "status": "ok",
+      "intent": "policies_vehicle",
+      "expected": [
+        "Contrat_Auto_2026_112"
+      ],
+      "actual": [
+        "Contrat_Auto_2026_112"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "issuer",
+      "question": "Quelle compagnie a émis ce contrat ?",
+      "status": "ok",
+      "intent": "issuer_policy",
+      "expected": [
+        "MedAssur"
+      ],
+      "actual": [
+        "MedAssur"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "holder",
+      "question": "Et son souscripteur ?",
+      "status": "ok",
+      "intent": "holder_policy",
+      "expected": [
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "policy-claims",
+      "question": "Et ses sinistres ?",
+      "status": "ok",
+      "intent": "policy_claims",
+      "expected": [
+        "Sinistre_S004"
+      ],
+      "actual": [
+        "Sinistre_S004"
+      ],
+      "correct": true
+    },
+    {
+      "language": "fr",
+      "step": "empty-payment",
+      "question": "Quelle indemnisation pour ce sinistre ?",
+      "status": "empty",
+      "intent": "indemnisation_sinistre",
+      "expected": [],
+      "actual": [],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "discover",
+      "question": "n7eb nchouf les clients",
+      "status": "ok",
+      "intent": "list_customers",
+      "expected": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Ahmed",
+        "Assure_Salma",
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "policies",
+      "question": "warini les contrats mte3ou",
+      "status": "ok",
+      "intent": "contrats_assure",
+      "expected": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "actual": [
+        "Contrat_Auto_2025_087",
+        "Contrat_Auto_2026_001",
+        "Contrat_Sante_2026_031"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "assets",
+      "question": "w les biens mte3ou",
+      "status": "ok",
+      "intent": "biens_assure",
+      "expected": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "actual": [
+        "PersonneAssuree_Ahmed",
+        "Vehicule_123TU4567"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "reverse-owner",
+      "question": "karhba 205 TU8890 mta chkoun",
+      "status": "ok",
+      "intent": "owner_vehicle",
+      "expected": [
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "vehicle-policies",
+      "question": "anehom contrats yghattiw karhba hedhi",
+      "status": "ok",
+      "intent": "policies_vehicle",
+      "expected": [
+        "Contrat_Auto_2026_112"
+      ],
+      "actual": [
+        "Contrat_Auto_2026_112"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "issuer",
+      "question": "anehi compagnie elli 3amlet contrat hedha",
+      "status": "ok",
+      "intent": "issuer_policy",
+      "expected": [
+        "MedAssur"
+      ],
+      "actual": [
+        "MedAssur"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "holder",
+      "question": "w chkoun souscrit fih",
+      "status": "ok",
+      "intent": "holder_policy",
+      "expected": [
+        "Assure_Youssef"
+      ],
+      "actual": [
+        "Assure_Youssef"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "policy-claims",
+      "question": "w les sinistres mte3ou",
+      "status": "ok",
+      "intent": "policy_claims",
+      "expected": [
+        "Sinistre_S004"
+      ],
+      "actual": [
+        "Sinistre_S004"
+      ],
+      "correct": true
+    },
+    {
+      "language": "tn-Darija",
+      "step": "empty-payment",
+      "question": "9adech tkhalles pour sinistre hedha",
+      "status": "empty",
+      "intent": "indemnisation_sinistre",
+      "expected": [],
+      "actual": [],
+      "correct": true
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Multilingual NLP: implementation and measured results
 
+Historical first release. The current conversation/discovery release and its newer classifier are documented in [CONVERSATION_RESULTS.md](CONVERSATION_RESULTS.md). The figures below describe the original ten-family experiment.
+
 Date: 2 November 2026. Branch: codex/multilingual-insurance-nlp. Starting commit: 506c290.
 
 ## What now works
