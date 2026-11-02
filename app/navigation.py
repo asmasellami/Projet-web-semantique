@@ -27,7 +27,7 @@ MODULES = [
     {"nom": "Acteurs & Expertises", "icone": "acteurs",
      "liens": [("Acteurs", "acteurs"), ("Assurés", "assures"), ("Expertises", "expertises")]},
     {"nom": "Assistant NLP", "icone": "question",
-     "liens": [("Assistant multilingue", "assistant"), ("Ancien moteur français", "question")]},
+     "liens": [("Assistant multilingue", "assistant")]},
 ]
 
 
