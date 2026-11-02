@@ -4,6 +4,14 @@ from app.multilingual.conversation import SESSION_KEY
 from app.multilingual.engine import answer
 
 class ConversationTests(FusekiIsole):
+    def test_reported_darija_pronoun_spelling(self):
+        self.post('Show all customers')
+        self.post(action='select',item='Assure_Ahmed')
+        for spelling in ['mt3ou','mt3o','mta3o','mte3o']:
+            s=self.post('atini les contrat '+spelling)
+            self.assertEqual(self.reply(s)['status'],'ok')
+            self.assertEqual(self.items(s),{'Contrat_Auto_2025_087','Contrat_Auto_2026_001','Contrat_Sante_2026_031'})
+
     def state(self,client=None):return (client or self.client).session.get(SESSION_KEY,{})
     def post(self,question=None,client=None,**kwargs):
         client=client or self.client

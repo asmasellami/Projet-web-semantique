@@ -3,6 +3,8 @@ import unicodedata
 
 def normalize(text):
     text = ''.join(c for c in unicodedata.normalize('NFKD', text.casefold()) if not unicodedata.combining(c))
+    text = re.sub(r'\b(?:mt3ou|mta3o|mte3o|mt3o)\b', 'mte3ou', text)
+    text = re.sub(r'\b(?:mt3ha|mta3ha)\b', 'mte3ha', text)
     return re.sub(r'\s+', ' ', text.replace('’', "'")).strip()
 
 def classifier_text(text):
