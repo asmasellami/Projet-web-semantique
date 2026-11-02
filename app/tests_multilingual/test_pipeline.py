@@ -85,6 +85,9 @@ class MultilingualPipelineTests(FusekiIsole):
             self.assertEqual(answer('policies of Ahmed').status,'model_unavailable')
 
     def test_page(self):
-        self.assertContains(self.client.get('/assistant/'),'Arabizi')
+        page=self.client.get('/assistant/')
+        self.assertContains(page,'Tunisian Darija')
+        self.assertNotContains(page,'Classifieur entraîné localement')
+        self.assertNotContains(page,'validation par locuteurs tunisiens encore nécessaire')
         with patch('app.multilingual.engine.predict',return_value={'label':'contrats_assure','accepted':True,'score':.95,'engine':'test'}):
             self.assertContains(self.client.get('/assistant/',{'q':'warini contrats mta3 Ahmed'}),'Contrat_Auto_2026_001')

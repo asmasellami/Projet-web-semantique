@@ -1,9 +1,7 @@
 {% extends "app/base.html" %}
 {% block titre %}Assistant multilingue{% endblock %}
 {% block contenu %}
-<h1>Assistant assurance · FR / EN / Tunisien Arabizi</h1>
-<p class="sous-titre">Posez une question sur vos données. Classifieur entraîné localement, entités vérifiées dans le graphe et requêtes SPARQL en lecture seule.</p>
-<p class="indice">Arabizi : support expérimental, corpus rédigé avec assistance IA, validation par locuteurs tunisiens encore nécessaire.</p>
+<h1>Assistant assurance · FR / EN / Tunisian Darija</h1>
 <form method="get" class="question-form"><input type="text" name="q" value="{{ q }}" maxlength="300" required autofocus aria-label="Question" placeholder="warini les contrats mta3 Ahmed"><button class="btn">Interroger</button></form>
 <div class="exemples">{% for c in contracts %}<a class="puce" href="?q={{ c.example|urlencode }}">{{ c.example }}</a>{% endfor %}</div>
 {% if rep %}

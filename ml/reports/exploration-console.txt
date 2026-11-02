@@ -1,0 +1,26 @@
+{
+  "not_answered": 38,
+  "wrong_records": 7,
+  "appropriate_clarification": 9,
+  "correct_records": 6
+}
+list_customers [('en', 'unsupported', '', 'not_answered'), ('fr', 'clarify', np.str_('assures_compagnie'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('assures_compagnie'), 'not_answered')]
+ambiguous_insurances [('en', 'unsupported', '', 'not_answered'), ('fr', 'clarify', np.str_('contrats_assure'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('contrats_assure'), 'not_answered')]
+list_insurers [('en', 'unsupported', '', 'not_answered'), ('fr', 'unsupported', '', 'not_answered'), ('tn-Darija', 'clarify', np.str_('assures_compagnie'), 'not_answered')]
+list_policies [('en', 'clarify', np.str_('contrats_assure'), 'not_answered'), ('fr', 'clarify', np.str_('contrats_assure'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('contrats_assure'), 'not_answered')]
+list_assets [('en', 'clarify', np.str_('biens_assure'), 'not_answered'), ('fr', 'clarify', np.str_('biens_assure'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('biens_assure'), 'not_answered')]
+owner_plate_123 [('en', 'unsupported', '', 'not_answered'), ('fr', 'unsupported', '', 'not_answered'), ('tn-Darija', 'unsupported', '', 'not_answered')]
+owner_plate_205 [('en', 'unsupported', '', 'not_answered'), ('fr', 'unsupported', '', 'not_answered'), ('tn-Darija', 'unsupported', '', 'not_answered')]
+policy_from_vehicle [('en', 'clarify', np.str_('contrats_assure'), 'not_answered'), ('fr', 'clarify', np.str_('contrats_assure'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('contrats_assure'), 'not_answered')]
+policy_issuer [('en', 'clarify', np.str_('baremes_sinistre'), 'not_answered'), ('fr', 'clarify', np.str_('indemnisation_sinistre'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('dommages_sinistre'), 'not_answered')]
+policy_holder [('en', 'ok', np.str_('garanties_contrat'), 'wrong_records'), ('fr', 'unsupported', '', 'not_answered'), ('tn-Darija', 'ok', np.str_('garanties_contrat'), 'wrong_records')]
+claim_by_id [('en', 'ok', np.str_('indemnisation_sinistre'), 'wrong_records'), ('fr', 'ok', np.str_('expertises_sinistre'), 'wrong_records'), ('tn-Darija', 'ok', np.str_('indemnisation_sinistre'), 'wrong_records')]
+claims_of_customer [('en', 'unsupported', '', 'not_answered'), ('fr', 'ok', np.str_('sinistres_filtres'), 'wrong_records'), ('tn-Darija', 'ok', np.str_('sinistres_filtres'), 'wrong_records')]
+missing_customer [('en', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification'), ('fr', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification'), ('tn-Darija', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification')]
+misspelled_name [('en', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification'), ('fr', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification'), ('tn-Darija', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification')]
+explicit_customer [('en', 'ok', np.str_('contrats_assure'), 'correct_records'), ('fr', 'ok', np.str_('contrats_assure'), 'correct_records'), ('tn-Darija', 'ok', np.str_('contrats_assure'), 'correct_records')]
+followup_assets [('en', 'unsupported', '', 'not_answered'), ('fr', 'clarify', np.str_('biens_assure'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('biens_assure'), 'not_answered')]
+followup_guarantees [('en', 'clarify', np.str_('clauses_contrat'), 'not_answered'), ('fr', 'clarify', np.str_('clauses_contrat'), 'not_answered'), ('tn-Darija', 'clarify', np.str_('clauses_contrat'), 'not_answered')]
+followup_choice [('en', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification'), ('fr', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification'), ('tn-Darija', 'clarify', np.str_('contrats_assure'), 'appropriate_clarification')]
+all_claims [('en', 'ok', np.str_('sinistres_filtres'), 'correct_records'), ('fr', 'ok', np.str_('sinistres_filtres'), 'correct_records'), ('tn-Darija', 'ok', np.str_('sinistres_filtres'), 'correct_records')]
+help [('en', 'unsupported', '', 'not_answered'), ('fr', 'clarify', np.str_('clauses_contrat'), 'not_answered'), ('tn-Darija', 'unsupported', '', 'not_answered')]
