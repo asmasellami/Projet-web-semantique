@@ -441,6 +441,17 @@ a.classe:hover { transform: translateY(-3px); border-color: var(--primaire); }
 .formulaire small { font-weight: 400; color: var(--texte-doux); }
 .formulaire input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--primaire); }
 .formulaire { max-width: 900px; }
+.formulaire .erreur-champ { color: var(--rouge); font-size: .8rem; font-weight: 500; }
+.formulaire[data-validation-inline="true"] input[aria-invalid="true"],
+.formulaire[data-validation-inline="true"] select[aria-invalid="true"],
+.formulaire[data-validation-inline="true"] textarea[aria-invalid="true"] {
+  border-color: var(--rouge);
+}
+.formulaire[data-validation-inline="true"] input[aria-invalid="true"]:focus,
+.formulaire[data-validation-inline="true"] select[aria-invalid="true"]:focus,
+.formulaire[data-validation-inline="true"] textarea[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rouge) 22%, transparent);
+}
 
 /* ---------- Accueil : modules ---------- */
 .grille-modules { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }

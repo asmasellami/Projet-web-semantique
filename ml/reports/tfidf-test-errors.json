@@ -6,6 +6,24 @@
     "predicted": "unsupported"
   },
   {
+    "id": "biens_assure-fr-9-0",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Ahmed",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-fr-9-1",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Salma",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
+    "id": "biens_assure-fr-9-2",
+    "text": "Je voudrais consulter les biens couverts par les contrats de Youssef",
+    "expected": "biens_assure",
+    "predicted": "unsupported"
+  },
+  {
     "id": "biens_assure-en-8-0",
     "text": "What does Ahmed own?",
     "expected": "biens_assure",
@@ -100,17 +118,5 @@
     "text": "9adech men sinistre fi Tunis",
     "expected": "unsupported",
     "predicted": "sinistres_filtres"
-  },
-  {
-    "id": "negative-en-29",
-    "text": "Compare insurer prices",
-    "expected": "unsupported",
-    "predicted": "assures_compagnie"
-  },
-  {
-    "id": "negative-tn-Arabizi-29",
-    "text": "9aren les tarifs mta3 compagnies",
-    "expected": "unsupported",
-    "predicted": "assures_compagnie"
   }
 ]

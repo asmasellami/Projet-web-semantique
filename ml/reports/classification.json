@@ -11,153 +11,26 @@
       "name": "TF-IDF + logistic regression",
       "engine": "tfidf",
       "path": "artifacts/tfidf.joblib",
-      "training_seconds": 0.9378551000263542,
+      "training_seconds": 1.158313199877739,
       "threshold": 0.15,
-      "margin": 0,
-      "selection_score": 0.9107871926053744,
+      "margin": 0.1,
+      "selection_score": 0.8976558794740613,
       "validation": {
         "all": {
           "n": 198,
-          "accuracy": 0.9141414141414141,
-          "macro_f1": 0.9117609663064208,
-          "supported_accuracy": 0.9277777777777778,
+          "accuracy": 0.898989898989899,
+          "macro_f1": 0.898162443616989,
+          "supported_accuracy": 0.9111111111111111,
           "rejection_rate": 0.7777777777777778,
-          "coverage": 0.9944444444444445
-        },
-        "fr": {
-          "n": 66,
-          "accuracy": 0.8787878787878788,
-          "macro_f1": 0.874891774891775,
-          "supported_accuracy": 0.9,
-          "rejection_rate": 0.6666666666666666,
-          "coverage": 1.0
-        },
-        "en": {
-          "n": 66,
-          "accuracy": 0.9242424242424242,
-          "macro_f1": 0.9212121212121214,
-          "supported_accuracy": 0.9333333333333333,
-          "rejection_rate": 0.8333333333333334,
-          "coverage": 0.9833333333333333
-        },
-        "tn-Arabizi": {
-          "n": 66,
-          "accuracy": 0.9393939393939394,
-          "macro_f1": 0.9362576817122271,
-          "supported_accuracy": 0.95,
-          "rejection_rate": 0.8333333333333334,
-          "coverage": 1.0
-        }
-      }
-    },
-    {
-      "name": "Frozen MiniLM + logistic regression",
-      "engine": "frozen",
-      "path": "artifacts/frozen",
-      "training_seconds": 26.480414199875668,
-      "threshold": 0.15,
-      "margin": 0,
-      "selection_score": 0.8311743811743811,
-      "validation": {
-        "all": {
-          "n": 198,
-          "accuracy": 0.8434343434343434,
-          "macro_f1": 0.835450595915712,
-          "supported_accuracy": 0.8833333333333333,
-          "rejection_rate": 0.4444444444444444,
-          "coverage": 1.0
+          "coverage": 0.9611111111111111
         },
         "fr": {
           "n": 66,
           "accuracy": 0.8333333333333334,
-          "macro_f1": 0.8114052614052615,
-          "supported_accuracy": 0.9,
-          "rejection_rate": 0.16666666666666666,
-          "coverage": 1.0
-        },
-        "en": {
-          "n": 66,
-          "accuracy": 0.8181818181818182,
-          "macro_f1": 0.8112554112554112,
-          "supported_accuracy": 0.85,
-          "rejection_rate": 0.5,
-          "coverage": 1.0
-        },
-        "tn-Arabizi": {
-          "n": 66,
-          "accuracy": 0.8787878787878788,
-          "macro_f1": 0.8708624708624708,
-          "supported_accuracy": 0.9,
-          "rejection_rate": 0.6666666666666666,
-          "coverage": 1.0
-        }
-      }
-    },
-    {
-      "name": "Fine-tuned SetFit MiniLM",
-      "engine": "setfit",
-      "path": "artifacts/setfit",
-      "training_seconds": 158.96233809995465,
-      "threshold": 0.15,
-      "margin": 0,
-      "selection_score": 0.8866002684184502,
-      "validation": {
-        "all": {
-          "n": 198,
-          "accuracy": 0.8939393939393939,
-          "macro_f1": 0.8872505484945677,
-          "supported_accuracy": 0.9166666666666666,
-          "rejection_rate": 0.6666666666666666,
-          "coverage": 1.0
-        },
-        "fr": {
-          "n": 66,
-          "accuracy": 0.9090909090909091,
-          "macro_f1": 0.9002331002331002,
-          "supported_accuracy": 0.95,
-          "rejection_rate": 0.5,
-          "coverage": 1.0
-        },
-        "en": {
-          "n": 66,
-          "accuracy": 0.8333333333333334,
-          "macro_f1": 0.8233100233100235,
+          "macro_f1": 0.8354978354978354,
           "supported_accuracy": 0.85,
           "rejection_rate": 0.6666666666666666,
-          "coverage": 1.0
-        },
-        "tn-Arabizi": {
-          "n": 66,
-          "accuracy": 0.9393939393939394,
-          "macro_f1": 0.9362576817122271,
-          "supported_accuracy": 0.95,
-          "rejection_rate": 0.8333333333333334,
-          "coverage": 1.0
-        }
-      }
-    },
-    {
-      "name": "TF-IDF + fine-tuned MiniLM blend",
-      "selection_score": 0.9107871926053744,
-      "weight": 1,
-      "threshold": 0.15,
-      "margin": 0,
-      "validation": {
-        "all": {
-          "n": 198,
-          "accuracy": 0.9141414141414141,
-          "macro_f1": 0.9117609663064208,
-          "supported_accuracy": 0.9277777777777778,
-          "rejection_rate": 0.7777777777777778,
-          "coverage": 0.9944444444444445
-        },
-        "fr": {
-          "n": 66,
-          "accuracy": 0.8787878787878788,
-          "macro_f1": 0.874891774891775,
-          "supported_accuracy": 0.9,
-          "rejection_rate": 0.6666666666666666,
-          "coverage": 1.0
+          "coverage": 0.9
         },
         "en": {
           "n": 66,
@@ -183,145 +56,42 @@
     "engine": "tfidf",
     "path": "artifacts/tfidf.joblib",
     "threshold": 0.15,
-    "margin": 0
+    "margin": 0.1
   },
   "test": {
     "TF-IDF + logistic regression": {
       "all": {
         "n": 198,
-        "accuracy": 0.9040404040404041,
-        "macro_f1": 0.9006128438967743,
-        "supported_accuracy": 0.9222222222222223,
-        "rejection_rate": 0.7222222222222222,
-        "coverage": 0.9666666666666667
+        "accuracy": 0.898989898989899,
+        "macro_f1": 0.8924245599190166,
+        "supported_accuracy": 0.9055555555555556,
+        "rejection_rate": 0.8333333333333334,
+        "coverage": 0.95
       },
       "fr": {
         "n": 66,
-        "accuracy": 0.9696969696969697,
-        "macro_f1": 0.9695910150455607,
-        "supported_accuracy": 0.9833333333333333,
+        "accuracy": 0.9242424242424242,
+        "macro_f1": 0.9172494172494172,
+        "supported_accuracy": 0.9333333333333333,
         "rejection_rate": 0.8333333333333334,
-        "coverage": 0.9833333333333333
+        "coverage": 0.9333333333333333
       },
       "en": {
         "n": 66,
-        "accuracy": 0.7878787878787878,
-        "macro_f1": 0.7506180094415389,
-        "supported_accuracy": 0.8,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 0.9333333333333333
-      },
-      "tn-Arabizi": {
-        "n": 66,
-        "accuracy": 0.9545454545454546,
-        "macro_f1": 0.9529561347743166,
-        "supported_accuracy": 0.9833333333333333,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 0.9833333333333333
-      }
-    },
-    "Frozen MiniLM + logistic regression": {
-      "all": {
-        "n": 198,
         "accuracy": 0.803030303030303,
-        "macro_f1": 0.8022435897435898,
-        "supported_accuracy": 0.8222222222222222,
-        "rejection_rate": 0.6111111111111112,
-        "coverage": 0.9833333333333333
-      },
-      "fr": {
-        "n": 66,
-        "accuracy": 0.7272727272727273,
-        "macro_f1": 0.7334861888221572,
-        "supported_accuracy": 0.7333333333333333,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 0.9833333333333333
-      },
-      "en": {
-        "n": 66,
-        "accuracy": 0.9090909090909091,
-        "macro_f1": 0.9002331002331001,
-        "supported_accuracy": 0.95,
-        "rejection_rate": 0.5,
-        "coverage": 1.0
+        "macro_f1": 0.7662690250925546,
+        "supported_accuracy": 0.8,
+        "rejection_rate": 0.8333333333333334,
+        "coverage": 0.9333333333333333
       },
       "tn-Arabizi": {
-        "n": 66,
-        "accuracy": 0.7727272727272727,
-        "macro_f1": 0.7746503496503496,
-        "supported_accuracy": 0.7833333333333333,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 0.9666666666666667
-      }
-    },
-    "Fine-tuned SetFit MiniLM": {
-      "all": {
-        "n": 198,
-        "accuracy": 0.8434343434343434,
-        "macro_f1": 0.8378996054036473,
-        "supported_accuracy": 0.8666666666666667,
-        "rejection_rate": 0.6111111111111112,
-        "coverage": 0.9611111111111111
-      },
-      "fr": {
-        "n": 66,
-        "accuracy": 0.8636363636363636,
-        "macro_f1": 0.8569965388147206,
-        "supported_accuracy": 0.8833333333333333,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 0.9833333333333333
-      },
-      "en": {
-        "n": 66,
-        "accuracy": 0.9696969696969697,
-        "macro_f1": 0.967832167832168,
-        "supported_accuracy": 1.0,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 1.0
-      },
-      "tn-Arabizi": {
-        "n": 66,
-        "accuracy": 0.696969696969697,
-        "macro_f1": 0.6697953561589925,
-        "supported_accuracy": 0.7166666666666667,
-        "rejection_rate": 0.5,
-        "coverage": 0.9
-      }
-    },
-    "TF-IDF + fine-tuned MiniLM blend": {
-      "all": {
-        "n": 198,
-        "accuracy": 0.9040404040404041,
-        "macro_f1": 0.9006128438967743,
-        "supported_accuracy": 0.9222222222222223,
-        "rejection_rate": 0.7222222222222222,
-        "coverage": 0.9666666666666667
-      },
-      "fr": {
         "n": 66,
         "accuracy": 0.9696969696969697,
         "macro_f1": 0.9695910150455607,
         "supported_accuracy": 0.9833333333333333,
         "rejection_rate": 0.8333333333333334,
-        "coverage": 0.9833333333333333
-      },
-      "en": {
-        "n": 66,
-        "accuracy": 0.7878787878787878,
-        "macro_f1": 0.7506180094415389,
-        "supported_accuracy": 0.8,
-        "rejection_rate": 0.6666666666666666,
-        "coverage": 0.9333333333333333
-      },
-      "tn-Arabizi": {
-        "n": 66,
-        "accuracy": 0.9545454545454546,
-        "macro_f1": 0.9529561347743166,
-        "supported_accuracy": 0.9833333333333333,
-        "rejection_rate": 0.6666666666666666,
         "coverage": 0.9833333333333333
       }
     }
-  },
-  "evaluation_history": "Stage1 test results inspected before adding a validation-tuned blend; same development test reused for reporting. Fresh human-reviewed external evaluation still required."
+  }
 }

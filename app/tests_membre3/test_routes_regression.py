@@ -17,6 +17,17 @@ class RoutesTests(FusekiIsole):
         for url in FORMULAIRES:
             self.assertEqual(self.client.get(url).status_code, 200, url)
 
+    def test_validation_inline_rouge_expertises_et_indemnisations(self):
+        for url in ("/expertises/nouveau/", "/indemnisations/nouveau/"):
+            with self.subTest(url=url):
+                r = self.client.get(url)
+                self.assertContains(r, 'data-validation-inline="true"')
+                self.assertContains(r, "champ.checkValidity()")
+
+                r = self.client.post(url, {})
+                self.assertContains(r, 'class="message message-error"')
+                self.assertContains(r, "est obligatoire")
+
     def test_routes_du_guide_assures_et_biens(self):
         self.assertContains(self.client.get("/assures/"), "Assurés")
         self.assertContains(self.client.get("/biens/"), "Biens assurés")

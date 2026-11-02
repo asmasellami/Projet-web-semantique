@@ -11,7 +11,7 @@
     <div class="message message-error"><ul>{% for er in erreurs %}<li>{{ er }}</li>{% endfor %}</ul></div>
   {% endif %}
 
-  <form method="post" class="formulaire">
+  <form method="post" class="formulaire" data-validation-inline="{% if e.slug == 'expertises' or e.slug == 'indemnisations' %}true{% endif %}">
     {% csrf_token %}
     <div class="formulaire-entete">Informations — {{ e.singulier|capfirst }}</div>
     <div class="formulaire-corps">
@@ -73,6 +73,71 @@
   </form>
 
   <script>
+    // Affiche les erreurs de saisie directement sous les champs concernés.
+    (function () {
+      const form = document.querySelector('.formulaire[data-validation-inline="true"]');
+      if (!form) return;
+
+      form.noValidate = true;
+      let validationLancee = false;
+
+      function afficherErreur(champ) {
+        const label = champ.closest("label");
+        if (!label) return;
+
+        let erreur = label.querySelector(".erreur-champ");
+        if (!erreur) {
+          erreur = document.createElement("span");
+          erreur.className = "erreur-champ";
+          erreur.id = `erreur-${champ.name}`;
+          erreur.setAttribute("role", "alert");
+          label.append(erreur);
+        }
+        erreur.textContent = champ.validationMessage;
+        champ.setAttribute("aria-invalid", "true");
+        champ.setAttribute("aria-describedby", erreur.id);
+      }
+
+      function effacerErreur(champ) {
+        const label = champ.closest("label");
+        const erreur = label && label.querySelector(".erreur-champ");
+        if (erreur) erreur.remove();
+        champ.removeAttribute("aria-invalid");
+        champ.removeAttribute("aria-describedby");
+      }
+
+      form.addEventListener("submit", function (event) {
+        let premierInvalide = null;
+        form.querySelectorAll("input, select, textarea").forEach(champ => {
+          if (!champ.willValidate) return;
+          if (champ.checkValidity()) {
+            effacerErreur(champ);
+          } else {
+            afficherErreur(champ);
+            premierInvalide = premierInvalide || champ;
+          }
+        });
+        validationLancee = true;
+        if (premierInvalide) {
+          event.preventDefault();
+          premierInvalide.focus();
+        }
+      });
+
+      form.addEventListener("input", function (event) {
+        if (validationLancee && event.target.willValidate) {
+          if (event.target.checkValidity()) effacerErreur(event.target);
+          else afficherErreur(event.target);
+        }
+      });
+      form.addEventListener("change", function (event) {
+        if (validationLancee && event.target.willValidate) {
+          if (event.target.checkValidity()) effacerErreur(event.target);
+          else afficherErreur(event.target);
+        }
+      });
+    })();
+
     // N'active (et ne soumet) que les champs du type choisi.
     (function () {
       const choix = document.getElementById("champ-type");
